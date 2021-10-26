@@ -37,4 +37,11 @@ class FornecedorController extends Controller
 
         return redirect('fornecedores/');
     }
+
+    public function destroy(Request $request)
+    {
+        Fornecedor::findOrFail($request->id)->delete();
+
+        return redirect('fornecedores/')->with('msg', 'Excluído com sucesso!');
+    }
 }
