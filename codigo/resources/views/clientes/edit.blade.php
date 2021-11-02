@@ -8,30 +8,29 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Mostrar Clienetes</title>
+    <title>Mostrar Clientes</title>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid"> <button class="navbar-toggler navbar-toggler-right border-0 p-0" type="button"
-                data-toggle="collapse" data-target="#navbar20">
+        <div class="container-fluid"> <button class="navbar-toggler navbar-toggler-right border-0 p-0" type="button" data-toggle="collapse" data-target="#navbar20">
                 <p class="navbar-brand text-white mb-0"> <i class="fa d-inline fa-lg fa-stop-circle"></i> BBBOOTSTRAP </p>
             </button>
             <div class="collapse navbar-collapse" id="navbar20">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"> <a class="nav-link" href="#">Home</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Contactus</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="#">About</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('clientes.index') }}">CLIENTES</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="fornecedores/">FORNECEDOR</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="produtos/">PRODUTOS</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="entradas/">ENTRADAS</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="vendas/">VENDAS</a> </li>
                 </ul>
-                <p class="d-none d-md-block lead mb-0 text-white"> <i class="fa d-inline fa-lg fa-stop-circle"></i> <b>
-                        BBBOOTSTRAP</b> </p>
+                <p class="d-none d-md-block lead mb-0 text-white"> <i class="fa d-inline fa-lg fa-stop-circle"></i>
+                    <b>BBBOOTSTRAP</b>
+                </p>
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item mx-1"> <a class="nav-link" href="#"> <i
-                                class="fa fa-github fa-fw fa-lg"></i> </a> </li>
-                    <li class="nav-item mx-1"> <a class="nav-link" href="#"> <i
-                                class="fa fa-dropbox fa-fw fa-lg"></i> </a> </li>
-                    <li class="nav-item mx-1"> <a class="nav-link" href="#"> <i
-                                class="fa fa-bitbucket fa-fw fa-lg"></i> </a> </li>
+                    <li class="nav-item mx-1"> <a class="nav-link" href="#"> <i class="fa fa-github fa-fw fa-lg"></i> </a> </li>
+                    <li class="nav-item mx-1"> <a class="nav-link" href="#"> <i class="fa fa-dropbox fa-fw fa-lg"></i> </a> </li>
+                    <li class="nav-item mx-1"> <a class="nav-link" href="#"> <i class="fa fa-bitbucket fa-fw fa-lg"></i> </a> </li>
                 </ul>
             </div>
         </div>
@@ -39,14 +38,14 @@
     
     <div class="container">
         <div class=" text-center mt-5 ">
-            <h1>Cadastar Fornecedor</h1>
+            <h1>Cadastrar Fornecedor</h1>
         </div>
         <div class="row ">
             <div class="col-lg-7 mx-auto">
                 <div class="card mt-2 mx-auto p-4 bg-light">
                     <div class="card-body bg-light">
                         <div class="container">
-                            <form id="contact-form" role="form" method="POST" action="./../update">
+                            <form id="contact-form" role="form" method="POST" action="{{ route("clientes.update") }}">
                                 @csrf
                                 @method('PUT')
                                 <div class="controls">

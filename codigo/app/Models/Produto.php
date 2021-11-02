@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\ItensVenda;
+use App\Models\ItensEntrada;
+
 class Produto extends Model
 {
     use HasFactory;
@@ -23,4 +26,14 @@ class Produto extends Model
         'desconto',
         'quantidade'
     ];
+
+    function itens_venda()
+    {
+        return $this->hasMany(ItensVenda::class, 'idproduto', 'id');
+    }
+
+    function itens_entrada()
+    {
+        return $this->hasMany(ItensEntrada::class, 'idproduto', 'id');
+    }
 }

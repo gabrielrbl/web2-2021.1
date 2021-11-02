@@ -13,34 +13,28 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid"> <button class="navbar-toggler navbar-toggler-right border-0 p-0" type="button"
-                data-toggle="collapse" data-target="#navbar20">
+        <div class="container-fluid"> <button class="navbar-toggler navbar-toggler-right border-0 p-0" type="button" data-toggle="collapse" data-target="#navbar20">
                 <p class="navbar-brand text-white mb-0"> <i class="fa d-inline fa-lg fa-stop-circle"></i> BBBOOTSTRAP </p>
             </button>
             <div class="collapse navbar-collapse" id="navbar20">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"> <a class="nav-link" href="clientes/">CLIENTES</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('clientes.index') }}">CLIENTES</a> </li>
                     <li class="nav-item"> <a class="nav-link" href="fornecedores/">FORNECEDOR</a> </li>
                     <li class="nav-item"> <a class="nav-link" href="produtos/">PRODUTOS</a> </li>
                     <li class="nav-item"> <a class="nav-link" href="entradas/">ENTRADAS</a> </li>
                     <li class="nav-item"> <a class="nav-link" href="vendas/">VENDAS</a> </li>
                 </ul>
-                <p class="d-none d-md-block lead mb-0 text-white"> <i class="fa d-inline fa-lg fa-stop-circle"></i> <b>
-                        BBBOOTSTRAP</b> </p>
+                <p class="d-none d-md-block lead mb-0 text-white"> <i class="fa d-inline fa-lg fa-stop-circle"></i>
+                    <b>BBBOOTSTRAP</b>
+                </p>
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item mx-1"> <a class="nav-link" href="#"> <i
-                                class="fa fa-github fa-fw fa-lg"></i> </a> </li>
-                    <li class="nav-item mx-1"> <a class="nav-link" href="#"> <i
-                                class="fa fa-dropbox fa-fw fa-lg"></i> </a> </li>
-                    <li class="nav-item mx-1"> <a class="nav-link" href="#"> <i
-                                class="fa fa-bitbucket fa-fw fa-lg"></i> </a> </li>
+                    <li class="nav-item mx-1"> <a class="nav-link" href="#"> <i class="fa fa-github fa-fw fa-lg"></i> </a> </li>
+                    <li class="nav-item mx-1"> <a class="nav-link" href="#"> <i class="fa fa-dropbox fa-fw fa-lg"></i> </a> </li>
+                    <li class="nav-item mx-1"> <a class="nav-link" href="#"> <i class="fa fa-bitbucket fa-fw fa-lg"></i> </a> </li>
                 </ul>
             </div>
         </div>
     </nav>
-
-
-
 
     @if (Session::has('msg'))
         <div class="alert alert-primary" role="alert">
