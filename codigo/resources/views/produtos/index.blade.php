@@ -19,10 +19,10 @@
             <div class="collapse navbar-collapse" id="navbar20">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('clientes.index') }}">CLIENTES</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="fornecedores/">FORNECEDOR</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="produtos/">PRODUTOS</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="entradas/">ENTRADAS</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="vendas/">VENDAS</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('fornecedores.index') }}">FORNECEDOR</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('produtos.index') }}">PRODUTOS</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('entradas.index') }}">ENTRADAS</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('vendas.index') }}">VENDAS</a> </li>
                 </ul>
                 <p class="d-none d-md-block lead mb-0 text-white"> <i class="fa d-inline fa-lg fa-stop-circle"></i>
                     <b>BBBOOTSTRAP</b>
@@ -78,13 +78,12 @@
                         <td>
                             <div class="d-flex justify-content-center">
                                 <div class="mr-2">
-                                    <a href="#"
-                                        class="btn btn-sm btn-warning">EDITAR</a>
+                                    <a href="{{ route("produtos.edit", ['id' => $produto->id]) }}" class="btn btn-sm btn-warning">EDITAR</a>
                                 </div>
-                                <form method="post" action="./clientes/destroy">
+                                <form method="post" action="{{ route("produtos.destroy") }}">
                                     @csrf
                                     @method('DELETE')
-                                    <input type="hidden" name="id" value="#" />
+                                    <input type="hidden" name="id" value="{{ $produto->id }}" />
 
                                     <input type="submit" class="btn btn-sm btn-danger" value="DELETAR" />
                                 </form>

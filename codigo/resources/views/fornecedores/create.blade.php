@@ -8,7 +8,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Cadastar Fornecedor</title>
+    <title>Cadastrar Fornecedor</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -18,10 +18,10 @@
             <div class="collapse navbar-collapse" id="navbar20">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('clientes.index') }}">CLIENTES</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="fornecedores/">FORNECEDOR</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="produtos/">PRODUTOS</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="entradas/">ENTRADAS</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="vendas/">VENDAS</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('fornecedores.index') }}">FORNECEDOR</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('produtos.index') }}">PRODUTOS</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('entradas.index') }}">ENTRADAS</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('vendas.index') }}">VENDAS</a> </li>
                 </ul>
                 <p class="d-none d-md-block lead mb-0 text-white"> <i class="fa d-inline fa-lg fa-stop-circle"></i>
                     <b>BBBOOTSTRAP</b>
@@ -44,7 +44,7 @@
                 <div class="card mt-2 mx-auto p-4 bg-light">
                     <div class="card-body bg-light">
                         <div class="container">
-                            <form id="contact-form" role="form" method="POST" action="{{ route("fornecedores.create") }}">
+                            <form id="contact-form" role="form" method="POST" action="{{ route("fornecedores.store") }}">
                                 @csrf
                                 <div class="controls">
                                     <div class="row">
@@ -58,7 +58,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group"> 
                                                 <label for="form_cnpj">CNPJ *</label> 
-                                                <input id="form_cnpj" type="number" name="cnpj" id="cnpj" class="form-control"required="required"> 
+                                                <input id="form_cnpj" type="number" name="cnpj" id="cnpj" class="form-control" required="required"> 
                                             </div>
                                         </div>
                                     </div>

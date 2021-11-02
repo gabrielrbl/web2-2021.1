@@ -19,10 +19,10 @@
             <div class="collapse navbar-collapse" id="navbar20">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('clientes.index') }}">CLIENTES</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="fornecedores/">FORNECEDOR</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="produtos/">PRODUTOS</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="entradas/">ENTRADAS</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="vendas/">VENDAS</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('fornecedores.index') }}">FORNECEDOR</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('produtos.index') }}">PRODUTOS</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('entradas.index') }}">ENTRADAS</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('vendas.index') }}">VENDAS</a> </li>
                 </ul>
                 <p class="d-none d-md-block lead mb-0 text-white"> <i class="fa d-inline fa-lg fa-stop-circle"></i>
                     <b>BBBOOTSTRAP</b>
@@ -45,7 +45,7 @@
                 <div class="card mt-2 mx-auto p-4 bg-light">
                     <div class="card-body bg-light">
                         <div class="container">
-                            <form id="contact-form" role="form" method="POST" action="{{ route('entradas.create') }}">
+                            <form id="contact-form" role="form" method="POST" action="{{ route('entradas.store') }}">
                                 @csrf
                                 <div class="controls">
                                     <div class="row">
