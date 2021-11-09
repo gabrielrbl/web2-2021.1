@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap');
+
+* { padding: 0; margin: 0; font-family: 'Poppins', sans-serif !important; }
+
+html { font-size: 15px; background: #6304fc; display: flex; justify-content: center; }
+
+body { display: flex; flex-direction: column; align-items: center; color: #eae0f9; border-radius: 2px; background: #7328eb; width: 75%; }
+
+#header { margin: 25px; display: flex; flex-direction: column; }
+#header h1, #header span { text-align: center; margin: 30px; }
+#header span { background: #6304fc; }
+#header span a { margin: 15px; text-decoration: none; font-size: 20px; color: #eae0f9; }
+#header span a:hover { text-decoration: underline; }
+
+#content { width: 75%; margin: 0 0 50px 0; }
+#content fieldset { padding: 10px; border: #be52ea solid 2px; border-radius: 5px; }
+#content legend { font-weight: bold; font-size: 20px; }
+#content .input { display: flex; flex-direction: column; padding: 5px; }
+#content .input label { padding: 5px; }
+#content .input input { padding: 7px; border: #be52ea solid 2px; border-radius: 5px; }
+#content .input select { padding: 7px; border: #be52ea solid 2px; border-radius: 5px; }
+#content .input button { margin-top: 20px; padding: 10px; background-color: #7328eb; color: #eae0f9; border: #6304fc solid 2px; box-shadow: 5px 5px #6304fc; border-radius: 4px; cursor: pointer; font-size: 20px; }
+
+#title { text-align: center; }
+#title span { font-size: 30px; font-weight: bold; }
+#title small { padding: 0.5em; }
+#title small a { color: #eae0f9 !important; }
+
+#table { border-collapse: collapse; border-radius: 1em !important; margin: 25px 0; width: 100%; text-align: center; }
+#table thead { background-color: #be52ea; color: #eae0f9; text-align: left; }
+#table tbody { background-color: #eae0f9; color:#7328eb; }
+#table th, #table td { padding: 12px 15px; }
+
+#table tbody input, #table tbody button { color: #7328eb; padding: 4px; margin: 3px; border: #be52ea solid 1px; border-radius: 5px; }
+
+#footer { margin: 0 0 25px 0; font-size: 15px; font-weight: semibold; font-stretch: condensed; }
