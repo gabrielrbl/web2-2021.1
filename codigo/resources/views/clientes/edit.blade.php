@@ -11,16 +11,22 @@
 
             <div class="input">
                 <label for="nome">Nome do Cliente</label>
-                <input id="nome" type="text" name="nome" required="required" value="{{ $cliente->nome }}">
+                <input id="nome" type="text" name="nome" value="{{ $cliente->nome }}">
+                @error('nome') <strong>{{ $message }}</strong> @enderror
             </div>
+
             <div class="input">
                 <label for="endereco">Endereço</label>
-                <input id="endereco" type="text" name="endereco" required="required" value="{{ $cliente->endereco }}">
+                <input id="endereco" type="text" name="endereco" value="{{ $cliente->endereco }}">
+                @error('endereco') <strong>{{ $message }}</strong> @enderror
             </div>
+
             <div class="input">
                 <label for="debito">Débito</label>
-                <input id="debito" type="text" name="debito" required="required" value="{{ $cliente->debito }}">
+                <input id="debito" type="number" name="debito" value="{{ $cliente->debito }}">
+                @error('debito') <strong>{{ $message }}</strong> @enderror
             </div>
+            
             <div class="input">
                 <button type="submit">Editar</button>
             </div>

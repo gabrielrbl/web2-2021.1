@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProdutoRequest;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 
@@ -35,22 +36,11 @@ class ProdutoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProdutoRequest $request)
     {
-        $produto = new Produto();
-        $produto->nome = $request->nome;
-        $produto->icms = $request->icms;
-        $produto->ipi = $request->ipi;
-        $produto->frete = $request->frete;
-        $produto->precofabrica = $request->precofabrica;
-        $produto->precocompra = $request->precocompra;
-        $produto->precovenda = $request->precovenda;
-        $produto->lucro = $request->lucro;
-        $produto->desconto = $request->desconto;
-        $produto->quantidade = $request->quantidade;
-        $produto->save();
+        Produto::create($request->all());
 
-        return redirect('produtos/');
+        return redirect()->route('produtos.index');
     }
 
     /**
@@ -82,9 +72,11 @@ class ProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreProdutoRequest $request)
     {
-        //
+        Produto::findOrFail($request->id)->update($request->all());
+
+        return redirect()->route('produtos.index');
     }
 
     /**

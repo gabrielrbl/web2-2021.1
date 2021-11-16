@@ -9,52 +9,62 @@
 
             <div class="input">
                 <label for="nome">Nome do Produto</label>
-                <input id="nome" type="text" name="nome" required="required">
+                <input id="nome" type="text" name="nome">
+                @error('nome') <strong>{{ $message }}</strong> @enderror
             </div>
 
             <div class="input">
                 <label for="icms">ICMS</label>
-                <input id="icms" type="number" name="icms" required="required">
+                <input id="icms" type="number" name="icms">
+                @error('icms') <strong>{{ $message }}</strong> @enderror
             </div>
 
             <div class="input">
                 <label for="ipi">IPI</label>
-                <input id="ipi" type="number" name="ipi" required="required">
+                <input id="ipi" type="number" name="ipi">
+                @error('ipi') <strong>{{ $message }}</strong> @enderror
             </div>
 
             <div class="input">
                 <label for="frete">Frete</label>
-                <input id="frete" type="number" name="frete" required="required">
+                <input id="frete" type="number" name="frete">
+                @error('frete') <strong>{{ $message }}</strong> @enderror
             </div>
 
             <div class="input">
                 <label for="precofabrica">Preço na fábrica</label>
-                <input id="precofabrica" type="number" name="precofabrica" required="required">
+                <input id="precofabrica" type="number" name="precofabrica">
+                @error('precofabrica') <strong>{{ $message }}</strong> @enderror
             </div>
 
             <div class="input">
                 <label for="precocompra">Preço de compra</label>
-                <input id="precocompra" type="number" name="precocompra" required="required">
+                <input id="precocompra" type="number" name="precocompra">
+                @error('precocompra') <strong>{{ $message }}</strong> @enderror
             </div>
 
             <div class="input">
                 <label for="precovenda">Preço de venda</label>
-                <input id="precovenda" type="number" name="precovenda" required="required">
+                <input id="precovenda" type="number" name="precovenda">
+                @error('precovenda') <strong>{{ $message }}</strong> @enderror
             </div>
 
             <div class="input">
                 <label for="lucro">Lucro</label>
-                <input id="lucro" type="number" name="lucro" required="required">
+                <input id="lucro" type="number" name="lucro">
+                @error('lucro') <strong>{{ $message }}</strong> @enderror
             </div>
 
             <div class="input">
                 <label for="desconto">Desconto</label>
-                <input id="desconto" type="number" name="desconto" required="required">
+                <input id="desconto" type="number" name="desconto">
+                @error('desconto') <strong>{{ $message }}</strong> @enderror
             </div>
 
             <div class="input">
                 <label for="quantidade">Quantidade</label>
-                <input id="quantidade" type="number" name="quantidade" required="required">
+                <input id="quantidade" type="number" name="quantidade">
+                @error('quantidade') <strong>{{ $message }}</strong> @enderror
             </div>
             
             <div class="input">

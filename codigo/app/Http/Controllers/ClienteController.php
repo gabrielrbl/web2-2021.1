@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreClienteRequest;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 
@@ -19,15 +20,11 @@ class ClienteController extends Controller
         return view('clientes.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreClienteRequest $request)
     {
-        $cliente = new Cliente();
-        $cliente->nome = $request->nome;
-        $cliente->endereco = $request->endereco;
-        $cliente->debito = $request->debito;
-        $cliente->save();
+        Cliente::create($request->all());
 
-        return redirect('clientes/');
+        return redirect()->route('clientes.index');
     }
 
     public function show($id)
@@ -52,17 +49,17 @@ class ClienteController extends Controller
         }
     }
 
-    public function update(Request $request)
+    public function update(StoreClienteRequest $request)
     {
         Cliente::findOrFail($request->id)->update($request->all());
 
-        return redirect('clientes/')->with('msg', 'Atualizado com sucesso!');
+        return redirect()->route('clientes.index')->with('msg', 'Atualizado com sucesso!');
     }
 
     public function destroy(Request $request)
     {
         Cliente::findOrFail($request->id)->delete();
 
-        return redirect('clientes/')->with('msg', 'Excluído com sucesso!');
+        return redirect()->route('clientes.index')->with('msg', 'Excluído com sucesso!');
     }
 }

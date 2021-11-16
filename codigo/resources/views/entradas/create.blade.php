@@ -9,7 +9,8 @@
 
             <div class="input">
                 <label for="idfornecedor">ID Fornecedor</label>
-                <input id="idfornecedor" type="number" name="idfornecedor" required="required"> 
+                <input id="idfornecedor" type="number" name="idfornecedor">
+                @error('idfornecedor') <strong>{{ $message }}</strong> @enderror
             </div>
 
             <div class="input">

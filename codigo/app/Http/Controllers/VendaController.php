@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreVendaRequest;
 use App\Models\Venda;
 use Illuminate\Http\Request;
 
@@ -35,13 +36,11 @@ class VendaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreVendaRequest $request)
     {
-        $venda = new Venda();
-        $venda->idcliente = $request->idcliente;
-        $venda->save();
+        Venda::create($request->all());
 
-        return redirect('vendas/');
+        return redirect()->route('vendas.index');
     }
 
     /**
@@ -86,6 +85,8 @@ class VendaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Venda::findOrFail($id)->delete();
+        
+        return redirect()->route('vendas.index');
     }
 }
