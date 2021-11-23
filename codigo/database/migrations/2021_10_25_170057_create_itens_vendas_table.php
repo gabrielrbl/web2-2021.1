@@ -16,9 +16,9 @@ class CreateItensVendasTable extends Migration
         Schema::create('itens_vendas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('idproduto');
-            $table->foreign('idproduto')->references('id')->on('produtos');
+            $table->foreign('idproduto')->references('id')->on('produtos')->onDelete('cascade');
             $table->unsignedBigInteger('idvenda');
-            $table->foreign('idvenda')->references('id')->on('vendas');
+            $table->foreign('idvenda')->references('id')->on('vendas')->onDelete('cascade');
             $table->decimal('valorunitario', 7, 2)->default(0);
             $table->integer('quantidade')->default(0);
             $table->timestamps();

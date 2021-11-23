@@ -16,6 +16,9 @@ class StoreEntradaRequest extends FormRequest
     {
         return [
             'idfornecedor' => 'required',
+            'idproduto' => 'required',
+            'quantidade' => 'required',
+            'precocompra' => 'required'
         ];
     }
 
@@ -23,6 +26,9 @@ class StoreEntradaRequest extends FormRequest
     {
         return [
             'idfornecedor.required' => 'O campo fornecedor é obrigatório.',
+            'idproduto.required' => 'O campo produto é obrigatório.',
+            'quantidade.required' => 'O campo quantidade é obrigatório.',
+            'precocompra.required' => 'O campo valor de compra é obrigatório.',
         ];
     }
 }

@@ -31,30 +31,24 @@
             <tbody>
                 @foreach ($entradas as $entrada)
                     <tr>
-                        <td>{{ $entrada->idfornecedor }}</td>
+                        <td>{{ $entrada->fornecedor->nome }}</td>
                         <td>R$ {{ $entrada->valortotal }}</td>
                         <td>{{ $entrada->datacompra }}</td>
                         <td>
                             <div>
-                                <a
-                                {{-- href="{{ route("entradas.show", ['id' => $entrada->id]) }}" --}}
-                                >
+                                <a href="{{ route("entradas.show", ['id' => $entrada->id]) }}">
                                     <button type="button">VISUALIZAR</button>
                                 </a>
                             </div>
 
                             <div>
-                                <a
-                                {{-- href="{{ route("entradas.edit", ['id' => $entrada->id]) }}" --}}
-                                >
+                                <a href="{{ route("entradas.edit", ['id' => $entrada->id]) }}">
                                     <button type="button">EDITAR</button>
                                 </a>
                             </div>
 
                             <div>
-                                <form method="post"
-                                {{-- action="{{ route("entradas.destroy") }}" --}}
-                                >
+                                <form method="post" action="{{ route("entradas.destroy") }}">
                                     @csrf
                                     @method('DELETE')
                                     <input type="hidden" name="id" value="{{ $entrada->id }}" />

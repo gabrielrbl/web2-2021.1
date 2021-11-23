@@ -20,12 +20,6 @@
             </div>
 
             <div class="input">
-                <label for="debito">Débito</label>
-                <input id="debito" type="number" name="debito">
-                @error('debito') <strong>{{ $message }}</strong> @enderror
-            </div>
-
-            <div class="input">
                 <button type="submit">Cadastrar</button>
             </div>
         </form>

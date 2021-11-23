@@ -1,18 +1,32 @@
 @extends('layouts.main')
 
-@section('title', 'Cadastro de Vendas')
+@section('title', 'Editar Venda')
 
 @section('content')
-   <div>
-        <form action="{{ route('vendas.store') }}" method="post">
+    <div>
+        <p id="title">
+            <span>Editar venda</span>
+
+            <small>
+                <a href="{{ route("vendas.create") }}">Adicionar</a>
+            </small>
+        </p>
+
+        <form action="{{ route("vendas.update") }}" method="post">
             @csrf
+            @method('PUT')
+            <input type="hidden" name="id" value="{{ $venda->id }}" />
 
             <div class="input">
                 <label for="idcliente">Selecione um cliente</label>
                 <select name="idcliente">
                     <option value="" disabled selected>Selecione</option>
                     @foreach($clientes as $cliente)
-                        <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>
+                        @if($cliente->id == $venda->idcliente)
+                            <option value="{{ $cliente->id }}" selected>{{ $cliente->nome }}</option>
+                        @else
+                            <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>
+                        @endif
                     @endforeach
                 </select>
                 @error('idcliente') <strong>{{ $message }}</strong> @enderror
@@ -25,46 +39,53 @@
             </div>
 
             <div class="input" id="produtos">
-                <div class="area-produto">
-                    <div class="input-produto-quant d-flex">
-                        <div class="input-group">
-                            <label for="idproduto">Selecione o produto</label>
-                            <select name="idproduto[]" onchange="setValor(this)">
-                                <option value="" disabled selected>Selecione</option>
-                                @foreach($produtos as $produto)
-                                    <option value="{{ $produto->id }}">{{ $produto->nome }}</option>
-                                @endforeach
-                            </select>
-                            @error('idproduto') <strong>{{ $message }}</strong> @enderror
-                        </div>
-                        <div class="input-group">
-                            <label for="quantidade">Quantidade</label>
-                            <input type="number" name="quantidade[]" value="0" min="1" onchange="setValor(this)" required>
-                            @error('quantidade') <strong>{{ $message }}</strong> @enderror
-                        </div>
-                        <div class="input-group">
-                            <label for="valor-unit">Valor unitário <small>(R$)</small></label>
-                            <input type="text" class="valor-unit" value="R$ 0.00" disabled>
-                        </div>
-                        <div class="input-group">
-                            <label>Valor total <small>(R$)</small></label>
-                            <input type="text" class="valor-total" value="R$ 0.00" disabled>
-                        </div>
-                        <div style="margin-top:40px">
-                            <a href="#" class="btn btn-danger remove-btn" onclick="remove(this)">REMOVER</a>
+                @foreach($venda->itensVenda as $itemVenda)
+                    <div class="area-produto">
+                        <div class="input-produto-quant d-flex">
+                            <div class="input-group">
+                                <label for="idproduto">Selecione o produto</label>
+                                <select name="idproduto[]" onchange="setValor(this)">
+                                    <option value="" disabled selected>Selecione</option>
+                                    @foreach($produtos as $produto)
+                                        @if($produto->id == $itemVenda->idproduto)
+                                            <option value="{{ $produto->id }}" selected>{{ $produto->nome }}</option>
+                                        @else
+                                            <option value="{{ $produto->id }}">{{ $produto->nome }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                @error('idproduto') <strong>{{ $message }}</strong> @enderror
+                            </div>
+                            <div class="input-group">
+                                <label for="quantidade">Quantidade</label>
+                                <input type="number" name="quantidade[]" value="{{ $itemVenda->quantidade }}" min="1" onchange="setValor(this)" required>
+                                @error('quantidade') <strong>{{ $message }}</strong> @enderror
+                            </div>
+                            <div class="input-group">
+                                <label for="valor-unit">Valor unitário <small>(R$)</small></label>
+                                <input type="text" class="valor-unit" value="R$ {{ $itemVenda->valorunitario }}" disabled>
+                                @error('precocompra') <strong>{{ $message }}</strong> @enderror
+                            </div>
+                            <div class="input-group">
+                                <label>Valor total <small>(R$)</small></label>
+                                <input type="text" class="valor-total" value="R$ {{ $itemVenda->quantidade * $itemVenda->valorunitario }}" disabled>
+                            </div>
+                            <div style="margin-top:40px">
+                                <a href="#" class="btn btn-danger remove-btn" onclick="remove(this)">REMOVER</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
 
             <div class="input">
                 <label>TOTAL</label>
-                <input type="text" class="valor-total-venda" value="R$ 0.00" disabled>
+                <input type="text" class="valor-total-venda" value="R$ {{ $venda->valortotal }}" disabled>
             </div>
 
             <div class="input">
                 <button type="submit">
-                    REGISTRAR
+                    ATUALIZAR
                 </button>
             </div>
         </form>

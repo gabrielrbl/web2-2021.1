@@ -16,9 +16,9 @@ class CreateItensEntradasTable extends Migration
         Schema::create('itens_entradas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('idproduto');
-            $table->foreign('idproduto')->references('id')->on('produtos');
+            $table->foreign('idproduto')->references('id')->on('produtos')->onDelete('cascade');
             $table->unsignedBigInteger('identrada');
-            $table->foreign('identrada')->references('id')->on('entradas');
+            $table->foreign('identrada')->references('id')->on('entradas')->onDelete('cascade');
             $table->decimal('icms', 7, 2)->default(0);
             $table->decimal('ipi', 7, 2)->default(0);
             $table->decimal('frete', 7, 2)->default(0);

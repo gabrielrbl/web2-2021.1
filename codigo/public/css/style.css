@@ -34,3 +34,6 @@ body { display: flex; flex-direction: column; align-items: center; color: #eae0f
 #table tbody input, #table tbody button { color: #7328eb; padding: 4px; margin: 3px; border: #be52ea solid 1px; border-radius: 5px; }
 
 #footer { margin: 0 0 25px 0; font-size: 15px; font-weight: semibold; font-stretch: condensed; }
+
+.input-group { margin: 0; padding: 5px; }
+.input-group input, select { width: 100%; }

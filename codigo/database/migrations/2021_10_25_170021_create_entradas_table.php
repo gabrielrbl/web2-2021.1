@@ -16,7 +16,7 @@ class CreateEntradasTable extends Migration
         Schema::create('entradas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('idfornecedor');
-            $table->foreign('idfornecedor')->references('id')->on('fornecedores');
+            $table->foreign('idfornecedor')->references('id')->on('fornecedores')->onDelete('cascade');
             $table->decimal('valortotal', 7, 2)->default(0);
             $table->datetime('datacompra')->useCurrent();
             $table->timestamps();

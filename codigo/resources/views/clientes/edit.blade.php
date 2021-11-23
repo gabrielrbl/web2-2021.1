@@ -20,12 +20,6 @@
                 <input id="endereco" type="text" name="endereco" value="{{ $cliente->endereco }}">
                 @error('endereco') <strong>{{ $message }}</strong> @enderror
             </div>
-
-            <div class="input">
-                <label for="debito">Débito</label>
-                <input id="debito" type="number" name="debito" value="{{ $cliente->debito }}">
-                @error('debito') <strong>{{ $message }}</strong> @enderror
-            </div>
             
             <div class="input">
                 <button type="submit">Editar</button>
