@@ -1,0 +1,20 @@
+* { padding: 0; margin: 0; }
+
+html { font-family: Arial; font-size: 15px; color: black; background: white; display: flex; justify-content: center; }
+
+body { display: flex; flex-direction: column; align-items: center; border-radius: 2px; background: #73AD21; width: 800px; }
+
+.title { margin: 25px; display: flex; flex-direction: column; }
+.title span { text-align: center; margin: 30px; }
+.title span a { margin: 15px; text-decoration: none; font-size: 20px; color: yellow; }
+.title span a:hover { text-decoration: underline; font-size: 25px; color: black; }
+
+form { width: 75%; margin: 0 0 50px 0; }
+form fieldset { padding: 10px; border: rgba(255, 0, 0, 0.3) solid 2px; border-radius: 5px; }
+form legend { font-weight: bold; font-size: 20px; }
+form .input { display: flex; flex-direction: column; padding: 5px; }
+form .input label { padding: 5px; }
+form .input input { padding: 7px; border: rgba(255, 0, 0, 0.3) solid 2px; border-radius: 5px; }
+form .input select { padding: 7px; border: rgba(255, 0, 0, 0.3) solid 2px; border-radius: 5px; }
+form .input button { margin: 25px; padding: 10px; background-color: black; color: #73AD21; cursor: pointer; font-size: 20px; }
+form .input button:hover { background-color: white; }
