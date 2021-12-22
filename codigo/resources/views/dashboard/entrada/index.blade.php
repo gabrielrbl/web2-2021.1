@@ -3,66 +3,99 @@
 @section('title', 'Entrada')
 
 @section('content')
-<main class="container-fluid bg-light min-vh-100 text-dark">
-    <section class="container py-3">
-        <div class="row align-items-center d-flex">
-            <div class="col-2 col-md-2 col-sm-2"></div>
-            <div class="col-8 col-md-8 col-sm-8 text-center">
-                <span class="display-6">ENTRADAS</span>
+    <section class="bg-gray-100 py-8">
+        <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
+            <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
+                <p class="text-center text-3xl">REALIZAR ENTRADA</p>
+
+                <form id="realizarEntrada" method="GET" class="flex flex-col pt-3 md:pt-8"
+                    {{-- action="{{ route('entrada.itensentrada') }}" --}}
+                    >
+                    <div class="flex flex-col">
+                        <label for="name" class="text-lg">FORNECEDOR</label>
+                        <input type="text" id="barraPesquisa"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                        <input id="idfornecedor" type="hidden" name="idfornecedor" required>
+                    </div>
+
+                    <input type="submit" value="DAR ENTRADA"
+                        class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8" />
+                </form>
             </div>
         </div>
-    </section>
 
-    <section class="d-flex justify-content-center">
-        <form id="realizarEntrada" method="GET" action="{{ route('entrada.itensentrada') }}">
-            <div class="row align-items-end mb-3 d-flex">
-                <div class="col-12 col-md-12 col-sm-12 me-auto mb-3">
-                    <label for="barraPesquisa" class="form-label black-text">FORNECEDOR</label>
-                    <input type="text" placeholder="FORNECEDOR" class="form-control" id="barraPesquisa" aria-describedby="fornecedorHelp">
-                    <input id="idfornecedor" name="idfornecedor" type="hidden" required>
-                    <div id="fornecedorHelp" class="form-text">Digite o nome do fornecedor e selecione-o na lista.</div>
-                </div>
-                <div class="col-12 col-md-12 col-sm-12 ms-auto d-flex align-items-end">
-                    <button type="submit" class="btn btn-primary ms-auto">DAR ENTRADA</button>
-                </div>
-            </div>
-        </form>
-    </section>
+        <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
+            ENTRADAS
+        </h1>
+        <div class="w-full mb-4">
+            <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+        </div>
 
-    <section class="container-fluid text-start mb-5">
-        <div class="table-responsive-lg">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">FORNECEDOR</th>
-                        <th scope="col">DATA</th>
-                        <th scope="col">STATUS</th>
-                        <th scope="col">ITENS</th>
-                        <th scope="col">VALOR TOTAL</th>
-                        <th scope="col">AÇÕES</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>AURORA BORJA AZEVEDO</td>
-                        <td>25 DE FEVEREIRO DE 2021</td>
-                        <td>FINALIZADA</td>
-                        <td>4</td>
-                        <td>R$ 4500</td>
-                        <td>
-                            <div class="btn-group">
-                                <a class="btn btn-primary" href="{{ route('entrada.itensentrada') }}">VISUALIZAR</a>
-                                <button class="btn btn-dark" onclick="deletar('1', 'AURORA BORJA AZEVEDO')">APAGAR</button>
-                            </div>
+        <div class="w-full mb-8 px-3 overflow-hidden rounded-lg shadow-lg">
+            <div class="w-full">
+                <table class="w-full">
+                    <thead>
+                        <tr
+                            class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+                            <th class="px-4 py-3">FORNECEDOR</th>
+                            <th class="px-4 py-3">DATA</th>
+                            <th class="px-4 py-3">STATUS</th>
+                            <th class="px-4 py-3">ITENS</th>
+                            <th class="px-4 py-3">VALOR TOTAL</th>
+                            <th class="px-4 py-3">AÇÕES</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                        <tr class="text-gray-700">
+                            <td class="px-4 py-3 border">
+                                <div class="flex items-center text-sm">
+                                    <div class="relative w-8 h-8 mr-3 rounded-full md:block">
+                                        <img class="object-cover w-full h-full rounded-full"
+                                            src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+                                            alt="" loading="lazy" />
+                                        <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-black">Aurora</p>
+                                        <p class="text-xs text-gray-600">Borja</p>
+                                    </div>
+                                </div>
+                            </td>
+                            {{-- <td class="px-4 py-3 text-ms font-semibold border">CARTÃO - À VISTA</td> --}}
+                            <td class="px-4 py-3 text-sm border">25 DE FEVEREIRO DE 2021</td>
+                            <td class="px-4 py-3 text-xs border">
+                                <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
+                                    FINALIZADA </span>
+                            </td>
+                            {{-- <td class="px-4 py-3 text-xs border">
+                            <span class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-gray-100 rounded-sm">
+                                PENDENTE </span>
                         </td>
-                    </tr>
-                </tbody>
-            </table>
+                        {{-- <td class="px-4 py-3 text-xs border">
+                            <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
+                                RECUSADO </span>
+                        </td> --}}
+                            <td class="px-4 py-3 text-sm font-semibold border">4</td>
+                            <td class="px-4 py-3 text-sm font-semibold border">R$ 4500</td>
+                            <td class="px-4 py-3 text-xs border">
+                                <div class="inline-flex rounded-md shadow-sm" role="group">
+                                    <button type="button"
+                                        class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+                                        <a class="btn btn-primary"
+                                            href="{{ route('entrada.itensentrada') }}">VISUALIZAR</a>
+                                    </button>
+                                    <button type="button" onclick="deletar('1', 'AURORA BORJA AZEVEDO')"
+                                        class="py-2 px-4 text-sm font-medium text-gray-900 bg-red-100 rounded-r-md border border-gray-200 hover:bg-red-300 hover:text-black-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+                                        APAGAR
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
-</main>
 @endsection('content')
 
 
@@ -70,7 +103,10 @@
     <script>
         $(document).ready(function() {
             $('#barraPesquisa').autocomplete({
-                source: [{label: 'Distribuidora de frios', value: 1 }],
+                source: [{
+                    label: 'Distribuidora de frios',
+                    value: 1
+                }],
                 minLength: 3,
                 select: (event, ui) => {
                     $("#barraPesquisa").val(ui.item.label);
@@ -80,17 +116,17 @@
                 }
             });
 
-            $("#realizarVenda").on("click", "button[type=submit]", function(e) {
+            $("#realizarEntrada").on("click", "input[type=submit]", function(e) {
                 e.preventDefault();
 
-                if ($("#idcliente").val() == "") {
-                    alert("Informe o cliente!");
+                if ($("#idfornecedor").val() == "") {
+                    alert("Informe o fornecedor!");
 
                     return false;
                 } else {
-                    $("#realizarVenda").submit();
-                    $("#realizarVenda button[type=submit]").prop("disabled", true);
-                    $("#realizarVenda button[type=submit]").val("VENDENDO...");
+                    $("#realizarEntrada").submit();
+                    $("#realizarEntrada input[type=submit]").prop("disabled", true);
+                    $("#realizarEntrada input[type=submit]").val("INSERINDO...");
                 }
             });
         });

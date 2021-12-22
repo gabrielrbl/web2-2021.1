@@ -3,44 +3,75 @@
 @section('title', 'Início')
 
 @section('content')
-<div id="carrosel" class="carousel carousel-dark slide mb-3" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carrosel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carrosel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carrosel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-      <div class="carousel-item active">
-          <img src="{{ asset('images/produto grande-teste.png') }}" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-          <img src="{{ asset('images/produto grande-teste.png') }}" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-          <img src="{{ asset('images/produto grande-teste.png') }}" class="d-block w-100" alt="...">
-      </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carrosel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Anterior</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carrosel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Próximo</span>
-  </button>
-</div>
-
-<img class="img-fluid w-100 mb-3" src="{{ asset('images/titulo 2.png') }}">
-
-<div class="row row-cols-1 row-cols-md-4 g-4 container-fluid">
-  <div class="col">
-    <div class="card h-100">
-      <img src="{{ asset('images/escapamento 1.png') }}" class="card-img-top" alt="...">
-      <div style="background-color: #8C1818;" class="card-body">
-          <h5 class="card-title">R$ 140,00</h5>
-          <p class="card-text">ESCAPX20-X10</p>
-      </div>
-    </div>
-  </div>
-</div>
+    <section class="bg-gray-100 py-8">
+        <div class="container mx-auto flex flex-wrap">
+            <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
+                PRODUTOS MAIS VENDIDOS
+            </h1>
+            <div class="w-full mb-4">
+                <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+            </div>
+            
+            <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
+                <div class="flex-1 bg-white rounded-t rounded-b-none shadow">
+                    <a href="#" class="flex flex-wrap no-underline hover:no-underline">
+                        <div class="w-full font-bold text-xl text-gray-800 px-6 pt-4">
+                            ESCAPX20-X10
+                        </div>
+                        <p class="w-full text-gray-600 text-xs md:text-sm px-6">
+                            R$ 140,00
+                        </p>
+                    </a>
+                </div>
+                <div class="flex-none mt-auto bg-white rounded-b rounded-t-none shadow p-6">
+                    <div class="flex items-center justify-start">
+                        <button
+                            class="mx-auto lg:mx-0 hover:underline text-black font-bold rounded-full my-6 py-4 px-8 shadow-lg">
+                            Visualizar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
+                <div class="flex-1 bg-white rounded-t rounded-b-none shadow">
+                    <a href="#" class="flex flex-wrap no-underline hover:no-underline">
+                        <div class="w-full font-bold text-xl text-gray-800 px-6 pt-4">
+                            ESCAPX20-X10
+                        </div>
+                        <p class="w-full text-gray-600 text-xs md:text-sm px-6">
+                            R$ 140,00
+                        </p>
+                    </a>
+                </div>
+                <div class="flex-none mt-auto bg-white rounded-b rounded-t-none shadow p-6">
+                    <div class="flex items-center justify-center">
+                        <button
+                            class="mx-auto lg:mx-0 hover:underline text-black font-bold rounded-full my-6 py-4 px-8 shadow-lg">
+                            Visualizar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
+                <div class="flex-1 bg-white rounded-t rounded-b-none shadow">
+                    <a href="#" class="flex flex-wrap no-underline hover:no-underline">
+                        <div class="w-full font-bold text-xl text-gray-800 px-6 pt-4">
+                            ESCAPX20-X10
+                        </div>
+                        <p class="w-full text-gray-600 text-xs md:text-sm px-6">
+                            R$ 140,00
+                        </p>
+                    </a>
+                </div>
+                <div class="flex-none mt-auto bg-white rounded-b rounded-t-none shadow p-6">
+                    <div class="flex items-center justify-start">
+                        <button
+                            class="mx-auto lg:mx-0 hover:underline text-black font-bold rounded-full my-6 py-4 px-8 shadow-lg">
+                            Visualizar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection('content')

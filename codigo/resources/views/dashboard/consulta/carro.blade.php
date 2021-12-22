@@ -3,55 +3,57 @@
 @section('title', 'Carros')
 
 @section('content')
-    <main class="container-fluid bg-light min-vh-100 text-dark">
-        <section class="container py-3">
-            <section class="container py-3 text-center container">
-                <div class="row">
-                    <div class="col-6 col-md-6 col-sm-6 mx-auto">
-                        <h1 class="display-6">CONSULTAR MODELO DE CARRO</h1>
-                    </div>
-                </div>
-            </section>
+    <section class="bg-gray-100 py-8">
+        <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
+            CONSULTAR MODELO DE CARRO
+        </h1>
+        <div class="w-full mb-4">
+            <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+        </div>
 
-            <section class="container-fluid text-dark">
-                <div class="row">
-                    <div class="col mb-3">
-                        <input type="text" id="txtBusca" class="form-control border border-5 border-dark" placeholder="Pesquisar modelo de carro..." aria-describedby="Help">
-                        <div id="Help" class="form-text">Digite o modelo do carro...</div>
-                    </div>
-                    <div class="col mb-3">
-                        <div class="float-end">
-                            <a class="btn btn-primary" href="{{ route('cadastro.carro') }}">NOVO CADASTRO</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
+            <div class="flex justify-end">
+                <a
+                {{-- href="{{ route('cadastro.carro') }}" --}}
+                >
+                    <button type="button"
+                        class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                        NOVO CADASTRO</button>
+                </a>
+            </div>
+        </div>
 
-            <div class="table-responsive-lg">
-                <table class="table table-hover">
+        <div class="w-full mb-8 px-3 overflow-hidden rounded-lg shadow-lg">
+            <div class="w-full">
+                <table class="w-full">
                     <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">MODELO</th>
-                            <th scope="col">AÇÕES</th>
+                        <tr
+                            class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+                            <th class="px-4 py-3">MODELO</th>
+                            <th class="px-4 py-3">AÇÕES</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>GOL</td>
-                            <td>
-                                <div class="btn-group" role="group">
-                                    <a class="btn btn-primary" href="#">VISUALIZAR/EDITAR</a>
-                                    <button class="btn btn-sm btn-dark" onclick="deletar('1', 'GOL')">APAGAR</button>
+                    <tbody class="bg-white">
+                        <tr class="text-gray-700">
+                            <td class="px-4 py-3 text-ms font-semibold border">GOL</td>
+                            <td class="px-4 py-3 text-xs border">
+                                <div class="inline-flex rounded-md shadow-sm" role="group">
+                                    <button type="button"
+                                        class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+                                        <a class="btn btn-primary" href="#">VISUALIZAR</a>
+                                    </button>
+                                    <button type="button" onclick="deletar('1', 'GOL')"
+                                        class="py-2 px-4 text-sm font-medium text-gray-900 bg-red-100 rounded-r-md border border-gray-200 hover:bg-red-300 hover:text-black-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+                                        APAGAR
+                                    </button>
                                 </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 @endsection('content')
 
 @push('scripts')
@@ -63,14 +65,5 @@
                 return false;
             }
         }
-
-        $(document).ready(function() {
-            $("#txtBusca").on("keyup", function() {
-                const value = $(this).val().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-                $("table tbody tr").filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-                });
-            });
-        });
     </script>
 @endpush('scripts')
