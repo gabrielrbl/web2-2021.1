@@ -1,5 +1,2 @@
-# Página das atividades desenvolvidas na disciplina web2-2021.1
+# Dentro da pasta codigo deve conter todos os arquivos codificados
 
-# Somente criar branch para quando houver códigos para desenvolver
-
-# seguir o modelo de pastas acima e o arquivo de instruções de cada atividade
