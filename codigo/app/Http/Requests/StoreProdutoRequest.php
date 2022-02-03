@@ -15,51 +15,40 @@ class StoreProdutoRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => 'required|max:100',
-            'icms' => 'required|numeric',
-            'ipi' => 'required|numeric',
-            'frete' => 'required|numeric',
-            'precofabrica' => 'required|numeric',
-            'precocompra' => 'required|numeric',
-            'precovenda' => 'required|numeric',
-            'lucro' => 'required|numeric',
-            'desconto' => 'required|numeric',
-            'quantidade' => 'required|numeric',
+            'idmotor' => 'required',
+            'idcarro' => 'required',
+            'idvalvulas' => 'required',
+            'idfabricacao' => 'required',
+            'idcategoria' => 'required',
+            'idmarca' => 'required',
+            'idlocalizacao' => 'required',
+            'referencia' => 'required|max:20',
+            'unidade' => 'required|max:20',
         ];
     }
 
     public function messages()
     {
         return [
-            'nome.required' => 'O nome do produto é obrigatório.',
-            'nome.max' => 'O nome do produto deve ter no máximo :max caracteres.',
-            
-            'icms.required' => 'O ICMS do produto é obrigatório.',
-            'icms.numeric' => 'O ICMS do produto deve conter somente números.',
-            
-            'ipi.required' => 'O IPI do produto é obrigatório.',
-            'ipi.numeric' => 'O IPI do produto deve conter somente números.',
-            
-            'frete.required' => 'O frete do produto é obrigatório.',
-            'frete.numeric' => 'O frete do produto deve conter somente números.',
-            
-            'precofabrica.required' => 'O preço de fábrica do produto é obrigatório.',
-            'precofabrica.numeric' => 'O preço de fábrica do produto deve conter somente números.',
-            
-            'precocompra.required' => 'O preço de compra do produto é obrigatório.',
-            'precocompra.numeric' => 'O preço de compra do produto deve conter somente números.',
-            
-            'precovenda.required' => 'O preço de venda do produto é obrigatório.',
-            'precovenda.numeric' => 'O preço de venda do produto deve conter somente números.',
-            
-            'lucro.required' => 'O lucro do produto é obrigatório.',
-            'lucro.numeric' => 'O lucro do produto deve conter somente números.',
+            'idmotor.required' => 'O motor do produto é obrigatório.',
 
-            'desconto.required' => 'O desconto do produto é obrigatório.',
-            'desconto.numeric' => 'O desconto do produto deve conter somente números.',
-            
-            'quantidade.required' => 'A quantidade do produto é obrigatório.',
-            'quantidade.numeric' => 'A quantidade do produto deve conter somente números.'
+            'idcarro.required' => 'O carro do produto é obrigatório.',
+
+            'idvalvulas.required' => 'A quantidade de válvulas do produto é obrigatória.',
+
+            'idfabricacao.required' => 'O ano de fabricação do produto é obrigatório.',
+
+            'idcategoria.required' => 'A categoria do produto é obrigatória.',
+
+            'idmarca.required' => 'A marca do produto é obrigatório.',
+
+            'idlocalizacao.required' => 'A localização do produto é obrigatória.',
+
+            'referencia.required' => 'A referência do produto é obrigatória.',
+            'referencia.max' => 'A referência do produto deve conter no máximo :max caracteres.',
+
+            'unidade.required' => 'A unidade do produto é obrigatória.',
+            'unidade.max' => 'A unidade do produto deve conter no máximo :max caracteres.'
         ];
     }
 }

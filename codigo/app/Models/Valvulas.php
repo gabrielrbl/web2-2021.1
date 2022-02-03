@@ -11,6 +11,10 @@ class Valvulas extends Model
 
     protected $table = "valvulas";
 
+    protected $primaryKey = "idvalvulas";
+
+    public $timestamps = false;
+
     protected $fillable = [
         'quantidade'
     ];

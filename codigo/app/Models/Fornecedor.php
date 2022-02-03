@@ -13,6 +13,10 @@ class Fornecedor extends Model
     
     protected $table = "fornecedor";
 
+    protected $primaryKey = "idfornecedor";
+
+    public $timestamps = false;
+
     protected $fillable = [
         'nome',
         'endereco',

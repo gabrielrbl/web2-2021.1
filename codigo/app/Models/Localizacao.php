@@ -11,6 +11,10 @@ class Localizacao extends Model
 
     protected $table = "localizacao";
 
+    protected $primaryKey = "idlocalizacao";
+
+    public $timestamps = false;
+
     protected $fillable = [
         'departamento'
     ];

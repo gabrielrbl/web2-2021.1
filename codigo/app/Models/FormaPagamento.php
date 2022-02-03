@@ -11,6 +11,10 @@ class FormaPagamento extends Model
 
     protected $table = "formapagamento";
 
+    protected $primaryKey = "idformapagamento";
+
+    public $timestamps = false;
+
     protected $fillable = [
         'condicao',
         'forma'

@@ -11,6 +11,10 @@ class Motor extends Model
 
     protected $table = "motor";
 
+    protected $primaryKey = "idmotor";
+
+    public $timestamps = false;
+
     protected $fillable = [
         'potencia'
     ];

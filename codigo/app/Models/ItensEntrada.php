@@ -14,6 +14,10 @@ class ItensEntrada extends Model
 
     protected $table = "itensentrada";
 
+    protected $primaryKey = "iditensentrada";
+
+    public $timestamps = false;
+
     protected $fillable = [
         'identrada',
         'idproduto',
@@ -27,11 +31,11 @@ class ItensEntrada extends Model
 
     public function entrada()
     {
-        return $this->belongsTo(Entrada::class, 'identrada', 'id');
+        return $this->belongsTo(Entrada::class, 'identrada', 'identrada');
     }
 
-    public function produtos()
+    public function produto()
     {
-        return $this->belongsTo(Produto::class, 'idproduto', 'id');
+        return $this->belongsTo(Produto::class, 'idproduto', 'idproduto');
     }
 }

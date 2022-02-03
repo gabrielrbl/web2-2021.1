@@ -3,6 +3,13 @@
 @section('title', 'Inserir item')
 
 @section('content')
+    <script>
+        function refreshParent(idproduto) {
+            window.close();
+            window.opener.location.href = '{{ route('venda.itensvenda', $venda->idvenda) }}' + '/' + idproduto;
+        }
+    </script>
+
     <section class="bg-gray-100 h-screen">
         <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
             INSERIR ITEM
@@ -11,7 +18,7 @@
             <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
         </div>
 
-        <form>
+        {{-- <form>
             <div class="container mx-auto text-gray-800">
                 <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
                     <p class="text-center text-3xl">PESQUISAR</p>
@@ -50,7 +57,7 @@
                     </div>
                 </div>
             </div>
-        </form>
+        </form> --}}
 
         <div class="w-full mb-8 px-3 overflow-hidden rounded-lg shadow-lg">
             <div class="w-full">
@@ -74,11 +81,10 @@
                                 <td class="px-4 py-3 text-ms font-semibold border">{{ $produto->marca->marca }}</td>
                                 <td class="px-4 py-3 text-ms font-semibold border">{{ $produto->referencia }}</td>
                                 <td class="px-4 py-3 text-ms font-semibold border">{{ $produto->quantidade }}</td>
-                                <td class="px-4 py-3 text-ms font-semibold border">R$ {{ $produto->valorvenda }}</td>
+                                <td class="px-4 py-3 text-ms font-semibold border">R$ {{ round($produto->valorvenda, 2) }}</td>
                                 <td class="px-4 py-3 text-ms font-semibold border">
-                                    <a href="#">
-                                        <button >SELECIONAR</button>
-                                    </a>
+                                    <button class="btn btn-primary"
+                                        onclick="refreshParent({{ $produto->idproduto }});">SELECIONAR</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -87,5 +93,4 @@
             </div>
         </div>
     </section>
-
 @endsection('content')

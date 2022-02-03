@@ -28,9 +28,12 @@
                     </div>
 
                     <div>
-                        <button type="submit" class="flex items-center justify-center w-12 h-12 text-gray-100 bg-gray-300 rounded-full">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        <button type="submit"
+                            class="flex items-center justify-center w-12 h-12 text-gray-100 bg-gray-300 rounded-full">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
                         </button>
                     </div>
@@ -60,18 +63,24 @@
                                             <img class="object-cover w-full h-full rounded-full"
                                                 src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
                                                 alt="" loading="lazy" />
-                                            <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                                            <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
+                                            </div>
                                         </div>
                                         <div>
-                                            <p class="font-semibold text-black">{{ strtoupper(explode(" ", $cliente->nome)[0]) }}</p>
-                                            <p class="text-xs text-gray-600">{{ strtoupper(explode(" ", $cliente->nome)[1]) }}</p>
+                                            <p class="font-semibold text-black">
+                                                {{ strtoupper(explode(' ', $cliente->nome)[0]) }}</p>
+                                            <p class="text-xs text-gray-600">
+                                                {{ strtoupper(explode(' ', $cliente->nome)[1]) }}</p>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-4 py-3 text-ms font-semibold border">{{ $cliente->telefone }}</td>
-                                <td class="px-4 py-3 text-sm border">Cliente {{ $cliente->cpf ? 'PF / CPF: ' . $cliente->cpf : 'PJ / CNPJ: ' . $cliente->cnpj }}</td>
+                                <td class="px-4 py-3 text-sm border">Cliente
+                                    {{ $cliente->cpf ? 'PF / CPF: ' . $cliente->cpf : 'PJ / CNPJ: ' . $cliente->cnpj }}
+                                </td>
                                 <td class="px-4 py-3 text-xs border">
-                                    <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">{{ $cliente->debito }}</span>
+                                    <span
+                                        class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">{{ $cliente->debito }}</span>
                                 </td>
                                 {{-- <td class="px-4 py-3 text-xs border">
                             <span class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-gray-100 rounded-sm">
@@ -85,9 +94,10 @@
                                     <div class="inline-flex rounded-md shadow-sm" role="group">
                                         <button type="button"
                                             class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
-                                            <a class="btn btn-primary" href="#">VISUALIZAR</a>
+                                            <a class="btn btn-primary" onclick="alert('Função ainda não disponível!'); return false;" href="#">VISUALIZAR</a>
                                         </button>
-                                        <button type="button" onclick="deletar('{{ $cliente->idcliente }}', '{{ strtoupper(explode(" ", $cliente->nome)[0]) . ' ' . strtoupper(explode(" ", $cliente->nome)[1]) }}')"
+                                        <button type="button"
+                                            onclick="deletar('{{ $cliente->idcliente }}', '{{ strtoupper(explode(' ', $cliente->nome)[0]) . ' ' . strtoupper(explode(' ', $cliente->nome)[1]) }}')"
                                             class="py-2 px-4 text-sm font-medium text-gray-900 bg-red-100 rounded-r-md border border-gray-200 hover:bg-red-300 hover:text-black-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
                                             APAGAR
                                         </button>
@@ -105,11 +115,12 @@
 @push('scripts')
     <script>
         function deletar(id, nome) {
-            if (confirm("Deseja realmente excluir " + nome + "?")) {
-                alert("Cliente excluído com sucesso!");
-                window.location.href = '';
-                return false;
-            }
+            alert("Função ainda não disponível!");
+            // if (confirm("Deseja realmente excluir " + nome + "?")) {
+            //     alert("Cliente excluído com sucesso!");
+            //     window.location.href = '';
+            //     return false;
+            // }
         }
 
         $(document).ready(function() {

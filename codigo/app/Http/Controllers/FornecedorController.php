@@ -8,37 +8,23 @@ use Illuminate\Http\Request;
 
 class FornecedorController extends Controller
 {
-    public function show()
-    {
-        $fornecedores = Fornecedor::all();
-
-        echo $fornecedores;
-    }
-
     public function index()
     {
-        $fornecedores = Fornecedor::all();
+        $fornecedores = Fornecedor::orderby('idfornecedor', 'desc')->get();
 
         return view('dashboard.consulta.fornecedor', ['fornecedores' => $fornecedores]);
     }
 
     public function create()
     {
-        return view('fornecedores.create');
+        return view('dashboard.cadastro.fornecedor');
     }
 
     public function store(StoreFornecedorRequest $request)
     {
         Fornecedor::create($request->all());
 
-        return redirect()->route('fornecedores.index');
-    }
-
-    public function update(StoreFornecedorRequest $request)
-    {
-        Fornecedor::findOrFail($request->id)->update($request->all());
-
-        return redirect()->route('fornecedores.index');
+        return redirect()->route('consulta.fornecedor');
     }
 
     public function destroy(Request $request)

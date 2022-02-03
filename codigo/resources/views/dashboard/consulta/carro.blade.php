@@ -13,9 +13,7 @@
 
         <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
             <div class="flex justify-end">
-                <a
-                {{-- href="{{ route('cadastro.carro') }}" --}}
-                >
+                <a href="{{ route('cadastro.carro') }}">
                     <button type="button"
                         class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                         NOVO CADASTRO</button>
@@ -41,9 +39,10 @@
                                     <div class="inline-flex rounded-md shadow-sm" role="group">
                                         <button type="button"
                                             class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
-                                            <a class="btn btn-primary" href="#">VISUALIZAR</a>
+                                            <a class="btn btn-primary" onclick="alert('Função ainda não disponível!'); return false;" href="#">VISUALIZAR</a>
                                         </button>
-                                        <button type="button" onclick="deletar('{{ $carro->idcarro }}', '{{ strtoupper($carro->modelo) }}')"
+                                        <button type="button"
+                                            onclick="deletar('{{ $carro->idcarro }}', '{{ strtoupper($carro->modelo) }}')"
                                             class="py-2 px-4 text-sm font-medium text-gray-900 bg-red-100 rounded-r-md border border-gray-200 hover:bg-red-300 hover:text-black-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
                                             APAGAR
                                         </button>
@@ -61,11 +60,12 @@
 @push('scripts')
     <script>
         function deletar(id, modelo) {
-            if (confirm("Deseja realmente excluir o modelo de carro " + modelo + "?")) {
-                alert("Modelo de carro excluído com sucesso!");
-                window.location.href = './carro.php';
-                return false;
-            }
+            alert("Função ainda não disponível!");
+            // if (confirm("Deseja realmente excluir o modelo de carro " + modelo + "?")) {
+            //     alert("Modelo de carro excluído com sucesso!");
+            //     window.location.href = './carro.php';
+            //     return false;
+            // }
         }
     </script>
 @endpush('scripts')

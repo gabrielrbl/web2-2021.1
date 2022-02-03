@@ -16,9 +16,8 @@ class StoreClienteRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => ['required', new NomeCompleto],
-            'endereco' => 'required|max:60',
-            'debito' => 'required|numeric'
+            'nome' => ['required', new NomeCompleto, 'max:50'],
+            'telefone' => 'required|max:16',
         ];
     }
 
@@ -26,12 +25,10 @@ class StoreClienteRequest extends FormRequest
     {
         return [
             'nome.required' => 'O campo nome é obrigatório.',
+            'nome.max' => 'O campo nome deve conter no máximo :max caracteres.',
 
-            'endereco.required' => 'O campo endereço é obrigatório.',
-            'endereco.max' => 'O campo endereço deve ter no máximo :max caracteres.',
-
-            'debito.required' => 'O campo débito é obrigatório.',
-            'debito.numeric' => 'O campo débito deve conter somente números.',
+            'telefone.required' => 'O campo telefone é obrigatório.',
+            'telefone.max' => 'O campo telefone deve conter no máximo :max caracteres.'
         ];
     }
 }
