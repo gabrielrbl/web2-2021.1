@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreItensVendaRequest;
 use App\Models\ItensVenda;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class ItensVendaController extends Controller
         //
     }
 
-    public function store(Request $request)
+    public function store(StoreItensVendaRequest $request)
     {
         $itemVenda = ItensVenda::create($request->all());
 
