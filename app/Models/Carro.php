@@ -11,6 +11,10 @@ class Carro extends Model
 
     protected $table = "carro";
 
+    protected $primaryKey = "idcarro";
+
+    public $timestamps = false;
+
     protected $fillable = [
         'modelo'
     ];

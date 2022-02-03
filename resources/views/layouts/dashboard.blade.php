@@ -92,12 +92,14 @@
                             <ul class="dropdown-menu absolute hidden text-black pt-1 bg-gray-300">
                                 <li>
                                     <a class="rounded-t py-2 px-4 block whitespace-no-wrap"
-                                        {{-- href="{{ route('usuario.perfil') }}" --}}
-                                        >PERFIL</a>
+                                        {{-- href="{{ route('usuario.perfil') }}" --}}>PERFIL</a>
                                 </li>
                                 <li>
-                                    <a class="rounded-t py-2 px-4 block whitespace-no-wrap"
-                                        href="{{ route('usuario.logout') }}">SAIR</a>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button class="rounded-t py-2 px-4 block whitespace-no-wrap"
+                                            type="submit">SAIR</button>
+                                    </form>
                                 </li>
                             </ul>
                         </div>

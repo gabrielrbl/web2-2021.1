@@ -23,6 +23,8 @@ class Produto extends Model
 
     protected $primaryKey = "idproduto";
 
+    public $timestamps = false;
+
     protected $fillable = [
         'idmotor',
         'idcarro',

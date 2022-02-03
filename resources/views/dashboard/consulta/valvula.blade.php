@@ -39,7 +39,7 @@
                                     <div class="inline-flex rounded-md shadow-sm" role="group">
                                         <button type="button"
                                             class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
-                                            <a class="btn btn-primary" href="#">VISUALIZAR</a>
+                                            <a class="btn btn-primary" onclick="alert('Função ainda não disponível!'); return false;" href="#">VISUALIZAR</a>
                                         </button>
                                         <button type="button" onclick="deletar('{{ $valvula->idvalvulas }}', '{{ $valvula->quantidade }}')"
                                             class="py-2 px-4 text-sm font-medium text-gray-900 bg-red-100 rounded-r-md border border-gray-200 hover:bg-red-300 hover:text-black-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
@@ -59,11 +59,12 @@
 @push('scripts')
     <script>
         function deletar(id, quantidade) {
-            if (confirm("Deseja realmente excluir a quantidade de " + quantidade + " valvúlas ?")) {
-                alert("Quantidade de válvulas excluída com sucesso!");
-                window.location.href = '';
-                return false;
-            }
+            alert("Função ainda não disponível!");
+            // if (confirm("Deseja realmente excluir a quantidade de " + quantidade + " valvúlas ?")) {
+            //     alert("Quantidade de válvulas excluída com sucesso!");
+            //     window.location.href = '';
+            //     return false;
+            // }
         }
     </script>
 @endpush('scripts')

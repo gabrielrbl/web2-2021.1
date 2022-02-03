@@ -16,8 +16,6 @@ class StoreVendaRequest extends FormRequest
     {
         return [
             'idcliente' => 'required',
-            'idproduto' => 'required',
-            'quantidade' => 'required|min:1'
         ];
     }
 
@@ -25,11 +23,6 @@ class StoreVendaRequest extends FormRequest
     {
         return [
             'idcliente.required' => 'O campo cliente é obrigatório.',
-
-            'idproduto.required' => 'O campo produto é obrigatório.',
-
-            'quantidade.required' => 'O campo quantidade é obrigatório.',
-            'quantidade.min' => 'O campo quantidade deve ser maior que zero.',
         ];
     }
 }

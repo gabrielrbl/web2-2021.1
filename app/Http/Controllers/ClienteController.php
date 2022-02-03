@@ -10,50 +10,21 @@ class ClienteController extends Controller
 {
     public function index()
     {
-        $clientes = Cliente::all();
+        $clientes = Cliente::orderby('idcliente', 'desc')->get();
 
         return view('dashboard.consulta.cliente', ['clientes' => $clientes]);
     }
 
     public function create()
     {
-        return view('clientes.create');
+        return view('dashboard.cadastro.cliente');
     }
 
     public function store(StoreClienteRequest $request)
     {
         Cliente::create($request->all());
 
-        return redirect()->route('clientes.index');
-    }
-
-    public function show($id)
-    {
-        if($id){
-            $cliente = Cliente::findOrFail($id);
-
-            return view('clientes.show', ['cliente' => $cliente]);
-        } else {
-            return redirect('clientes/');
-        }
-    }
-
-    public function edit($id)
-    {
-        if($id){
-            $cliente = Cliente::findOrFail($id);
-
-            return view('clientes.edit', ['cliente' => $cliente]);
-        } else {
-            return redirect('clientes/');
-        }
-    }
-
-    public function update(StoreClienteRequest $request)
-    {
-        Cliente::findOrFail($request->id)->update($request->all());
-
-        return redirect()->route('clientes.index')->with('msg', 'Atualizado com sucesso!');
+        return redirect()->route('consulta.cliente');
     }
 
     public function destroy(Request $request)

@@ -11,6 +11,10 @@ class Fabricacao extends Model
 
     protected $table = "fabricacao";
 
+    protected $primaryKey = "idfabricacao";
+
+    public $timestamps = false;
+
     protected $fillable = [
         'ano'
     ];

@@ -13,12 +13,14 @@
 
         <div class="w-full flex flex-col text-black">
             <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
-                <form class="flex flex-col pt-3 md:pt-8" method="GET" id="form">
+                <form class="flex flex-col pt-3 md:pt-8" method="POST" action="{{ route('carro.store') }}">
+                    @csrf
                     <div class="flex flex-col pt-4">
                         <label for="modelo" class="text-lg">MODELO</label>
                         <input type="text" id="modelo" oninput="validaInput(this, true)" name="modelo" maxlength="30"
                             placeholder="MODELO" autocomplete="off" required
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+                        @error('modelo') <strong>{{ $message }}</strong> @enderror
                     </div>
 
                     <input type="submit" value="CADASTRAR"
@@ -28,17 +30,3 @@
         </div>
     </section>
 @endsection('content')
-
-@push('scripts')
-    <script>
-        $(document).ready(function() {
-            $("#form").on("submit", function() {
-                event.preventDefault();
-                $("input[type=submit]").prop("disabled", true);
-                $("input[type=submit]").text("CADASTRANDO...");
-
-                window.location.href = '{{ route('consulta.carro') }}';
-            });
-        });
-    </script>
-@endpush('scripts')

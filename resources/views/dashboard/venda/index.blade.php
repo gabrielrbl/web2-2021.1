@@ -9,14 +9,28 @@
                 <p class="text-center text-3xl">REALIZAR VENDA</p>
 
                 <form id="realizarVenda" method="POST" class="flex flex-col pt-3 md:pt-8"
-                    action="{{ route('venda.create') }}">
+                    action="{{ route('venda.store') }}">
                     @csrf
+
                     <div class="flex flex-col">
                         <label for="name" class="text-lg">CLIENTE</label>
                         <input type="text" autocomplete="off" id="barraPesquisa"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
                         <input id="idcliente" type="hidden" name="idcliente" required>
+                        @error('idcliente') <strong>{{ $message }}</strong> @enderror
                     </div>
+
+                    <input type="hidden" name="idformapagamento" value="1" />
+                    @error('idformapagamento') <strong>{{ $message }}</strong> @enderror
+
+                    <input type="hidden" name="data" value="{{ date('Y-m-d') }}" />
+                    @error('data') <strong>{{ $message }}</strong> @enderror
+
+                    <input type="hidden" name="valortotal" value="0" />
+                    @error('valortotal') <strong>{{ $message }}</strong> @enderror
+
+                    <input type="hidden" name="status" value="0" />
+                    @error('status') <strong>{{ $message }}</strong> @enderror
 
                     <input type="submit" value="REALIZAR VENDA"
                         class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8" />
@@ -83,7 +97,8 @@
                                         RECUSADO </span>
                                 </td> --}}
                                 <td class="px-4 py-3 text-sm font-semibold border">{{ $venda->itensvenda->count() }}</td>
-                                <td class="px-4 py-3 text-sm font-semibold border">R$ {{ $venda->valortotal }}</td>
+                                <td class="px-4 py-3 text-sm font-semibold border">R$ {{ round($venda->valortotal, 2) }}
+                                </td>
                                 <td class="px-4 py-3 text-xs border">
                                     <div class="inline-flex rounded-md shadow-sm" role="group">
                                         <button type="button"
@@ -92,7 +107,7 @@
                                                 href="{{ route('venda.itensvenda', $venda->idvenda) }}">VISUALIZAR</a>
                                         </button>
                                         <button type="button"
-                                            onclick="deletar('{{ $venda->idvenda }}', '{{ strtoupper(explode(' ', $venda->cliente->nome)[0]) . ' ' . strtoupper(explode(' ', $venda->cliente->nome)[1]) }}')"
+                                            onclick="deletar('{{ $venda->idvenda }}', '{{ strtoupper(explode(' ', $venda->cliente->nome)[0]) .' ' .strtoupper(explode(' ', $venda->cliente->nome)[1]) }}')"
                                             class="py-2 px-4 text-sm font-medium text-gray-900 bg-red-100 rounded-r-md border border-gray-200 hover:bg-red-300 hover:text-black-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
                                             APAGAR
                                         </button>
@@ -110,7 +125,7 @@
 @push('scripts')
     <script>
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-        
+
         $(document).ready(function() {
             $('#barraPesquisa').autocomplete({
                 source: function(request, response) {
@@ -152,11 +167,12 @@
         });
 
         function deletar(id, nome) {
-            if (confirm("Deseja realmente excluir a venda de " + nome + "?")) {
-                alert("Venda excluída com sucesso!");
-                window.location.href = '';
-                return false;
-            }
+            alert("Função ainda não disponível!");
+            // if (confirm("Deseja realmente excluir a venda de " + nome + "?")) {
+            //     alert("Venda excluída com sucesso!");
+            //     window.location.href = '';
+            //     return false;
+            // }
         }
     </script>
 @endpush('scripts')

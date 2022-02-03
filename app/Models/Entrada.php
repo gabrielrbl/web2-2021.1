@@ -14,10 +14,15 @@ class Entrada extends Model
 
     protected $table = "entrada";
 
+    protected $primaryKey = "identrada";
+
+    public $timestamps = false;
+
     protected $fillable = [
         'idfornecedor',
-        'valortotal',
-        'datacompra'
+        'valortotalnota',
+        'datacompra',
+        'status'
     ];
 
     public function fornecedor()
@@ -28,5 +33,10 @@ class Entrada extends Model
     function itensentrada()
     {
         return $this->hasMany(ItensEntrada::class, 'identrada', 'identrada');
+    }
+
+    public function countItensEntrada()
+    {
+        return $this->itensentrada()->sum('quantidade');
     }
 }

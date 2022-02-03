@@ -3,168 +3,293 @@
 @section('title', 'Itens entrada')
 
 @section('content')
-<main class="container-fluid bg-light text-dark">
-    <section class="container py-3">
-        <div class="row align-items-center d-flex">
-            <div class="col-2 col-md-2 col-sm-2">
-                <a href="{{ route('entrada.index') }}" class="btn btn-primary">VOLTAR</a>
-            </div>
-            <div class="col-8 col-md-8 col-sm-8 text-center">
-                <span class="display-6">ITENS - ENTRADA #1</span>
+    <section class="bg-gray-100 py-8">
+        @if (\Session::has('success'))
+            <script>
+                alert('{!! \Session::get('success') !!}');
+            </script>
+        @endif
+
+        <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
+            ITENS - ENTRADA #{{ $entrada->identrada }}
+        </h1>
+        <div class="w-full mb-4">
+            <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+        </div>
+
+        <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
+            <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
+                <p class="text-center text-3xl">INFORMAÇÕES DO FORNECEDOR</p>
+                <div class="flex flex-col">
+                    <div class="mb-3">
+                        <label>NOME</label>
+                        <input type="text"
+                            value="{{ strtoupper(explode(' ', $entrada->fornecedor->nome)[0]) .' ' .strtoupper(explode(' ', $entrada->fornecedor->nome)[1]) }}"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                            disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label>ENDEREÇO</label>
+                        <input type="text"
+                            value="{{ strtoupper(explode(' ', $entrada->fornecedor->nome)[0]) .' ' .strtoupper(explode(' ', $entrada->fornecedor->nome)[1]) }}"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                            disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label>TELEFONE</label>
+                        <input type="text" value="{{ $entrada->fornecedor->telefone }}"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                            disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label>CNPJ</label>
+                        <input type="text" value="{{ $entrada->fornecedor->cnpj }}"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                            disabled>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
 
-    <section class="container min-vh-100 py-5">
-        <section class="text-start mb-3">
-            <div class="row">
-                <p class="display-6 ms-auto">INFORMAÇÕES DO FORNECEDOR</p>
+        @if ($entrada->status == 0)
+            <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
+                INSERIR PRODUTO
+            </h1>
+            <div class="w-full mb-4">
+                <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
             </div>
 
-            <div class="row">
-                <div class="col-12 col-md-4 col-sm-6 mb-3">
-                    <label for="nomeFornecedor" class="form-label black-text">NOME</label>
-                    <input type="text" id="nomeFornecedor" class="form-control" value="AURORA BORJA AZEVEDO" disabled>
-                </div>
-                <div class="col-12 col-md-4 col-sm-6 mb-3">
-                    <label for="enderecoFornecedor" class="form-label black-text">ENDEREÇO</label>
-                    <input type="text" id="enderecoFornecedor" class="form-control" value="RUA BELA VISTA" disabled>
-                </div>
-                <div class="col-12 col-md-4 col-sm-6 mb-3">
-                    <label for="telefoneFornecedor" class="form-label black-text">TELEFONE</label>
-                    <input type="text" id="telefoneFornecedor" class="form-control" value="(50) 96859-0282" disabled>
-                </div>
-                <div class="col-12 col-md-4 col-sm-6 mb-3">
-                    <label for="cnpjFornecedor" class="form-label black-text">CNPJ</label>
-                    <input type="text" id="cnpjFornecedor" class="form-control" value="83.839.472/4776-88" disabled>
-                </div>
-            </div>
-        </section>
+            <form method="POST" id="inserirItensEntrada" action="{{ route('itensentrada.store') }}">
+                @csrf
 
-        
-            <section class="text-start mb-3">
-                <div class="row">
-                    <p class="display-6 ms-auto">INSERIR ITENS</p>
-                </div>
+                <input type="hidden" name="identrada" value="{{ $entrada->identrada }}">
+                @error('identrada') <strong>{{ $message }}</strong> @enderror
 
-                <form method="GET" id="inserirItensEntrada" action="">
-                    <div class="row align-items-end d-flex">
-                        <div class="col-12 col-md-10 col-sm-10 mb-3">
-                            <label for="idproduto" class="form-label black-text">PRODUTO</label>
-                            <input type="text" class="form-control" placeholder="Pesquise pelo produto..." value="1" disabled>
-                            <input type="hidden" id="idproduto" name="idproduto" value="#" required>
-
-                        </div>
-                        <div class="col-12 col-md-2 col-sm-2 mb-3 ms-auto d-flex align-items-end">
-                            <a class="btn btn-primary" title="Editar" onclick="window.open(`#`, 'Pesquisar produto', 'width=1000,height=800'); return false;">
-                                PESQUISAR
+                <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
+                    <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
+                        <div class="mb-3 flex justify-between">
+                            <input type="text" value="{{ $produto ? $produto->referencia : 'SELECIONE O PRODUTO...' }}"
+                                disabled>
+                            <input type="hidden" id="idproduto" name="idproduto"
+                                value="{{ $produto ? $produto->idproduto : '' }}" required>
+                            <a class="btn btn-primary ms-auto" title="Editar"
+                                onclick="window.open(`{{ route('entrada.inseriritem', $entrada->identrada) }}`, 'Pesquisar produto', 'width=1000,height=800'); return false;">
+                                <button
+                                    class="px-4 py-2 font-semibold text-sm bg-black text-white rounded-full shadow-sm">PESQUISAR</button>
                             </a>
+                            @error('idproduto') <strong>{{ $message }}</strong> @enderror
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-md-4 col-sm-6 mb-3">
-                            <label for="precoCompra" class="form-label black-text">PREÇO COMPRA</label>
-                            <input type="number" min="0" id="precoCompra" oninput="validaInputNumber(this);" name="precoCompra" class="form-control" placeholder="PREÇO DE COMPRA" value="" placeholder="PREÇO DE COMPRA" required>
+                        <div class="mb-3">
+                            <label>PREÇO DE COMPRA</label>
+                            <input type="number" min="0" autocomplete="off" id="precoCompra"
+                                oninput="validaInputNumber(this);"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                                name="precocompra" value="{{ $produto ? $produto->valordecompra : '' }}"
+                                placeholder="PREÇO DE COMPRA" {{ $produto ? 'required' : 'disabled' }}>
+                            @error('precocompra') <strong>{{ $message }}</strong> @enderror
                         </div>
-                        <div class="col-12 col-md-4 col-sm-6 mb-3">
-                            <label for="quantidade" class="form-label black-text">QUANTIDADE</label>
-                            <input type="number" min="1" id="quantidade" name="quantidade" class="form-control" placeholder="QUANTIDADE" autocomplete="off" required>
+                        <div class="mb-3">
+                            <label>QUANTIDADE</label>
+                            <input type="number" min="1" autocomplete="off" id="quantidade"
+                                max="{{ $produto ? $produto->quantidade : '' }}" name="quantidade"
+                                oninput="validaInputNumber(this);"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                                placeholder="QUANTIDADE" {{ $produto ? 'required' : 'disabled' }}>
+                            @error('quantidade') <strong>{{ $message }}</strong> @enderror
                         </div>
-                        <div class="col-12 col-md-4 col-sm-6 mb-3">
-                            <label for="unidade" class="form-label black-text">UNIDADE</label>
-                            <input type="text" oninput="validaInput(this);" autocomplete="off" name="unidade" id="unidade" class="form-control" placeholder="UNIDADE" required maxlength="2">
+                        <div class="mb-3">
+                            <label>UNIDADE</label>
+                            <input type="text" maxlength="2" autocomplete="off" id="unidade" name="unidade"
+                                oninput="validaInput(this);"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                                placeholder="UNIDADE" {{ $produto ? 'required' : 'disabled' }}>
+                            @error('unidade') <strong>{{ $message }}</strong> @enderror
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-md-4 col-sm-6 mb-3">
-                            <label for="ipi" class="form-label black-text">IPI (%)</label>
-                            <input type="number" min="1" id="ipi" autocomplete="off" oninput="validaInputNumber(this);" name="ipi" class="form-control" placeholder="IPI" required>
+                        <div class="mb-3">
+                            <label>IPI (%)</label>
+                            <input type="number" min="1" autocomplete="off" max="100" id="ipi" name="ipi"
+                                oninput="validaInputNumber(this);"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                                placeholder="IPI" {{ $produto ? 'required' : 'disabled' }}>
+                            @error('ipi') <strong>{{ $message }}</strong> @enderror
                         </div>
-                        <div class="col-12 col-md-4 col-sm-6 mb-3">
-                            <label for="frete" class="form-label black-text">FRETE (%)</label>
-                            <input type="number" min="1" id="frete" autocomplete="off" oninput="validaInputNumber(this);" name="frete" class="form-control" placeholder="FRETE" required>
+                        <div class="mb-3">
+                            <label>FRETE (%)</label>
+                            <input type="number" min="1" autocomplete="off" max="100" id="frete" name="frete"
+                                oninput="validaInputNumber(this);"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                                placeholder="FRETE" {{ $produto ? 'required' : 'disabled' }}>
+                            @error('frete') <strong>{{ $message }}</strong> @enderror
                         </div>
-                        <div class="col-12 col-md-4 col-sm-6 mb-3">
-                            <label for="icms" class="form-label black-text">ICMS (%)</label>
-                            <input type="number" min="1" id="icms" autocomplete="off" oninput="validaInputNumber(this);" name="icms" class="form-control" placeholder="ICMS" required>
+                        <div class="mb-3">
+                            <label>ICMS (%)</label>
+                            <input type="number" min="1" autocomplete="off" max="100" id="icms" name="icms"
+                                oninput="validaInputNumber(this);"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                                placeholder="ICMS" {{ $produto ? 'required' : 'disabled' }}>
+                            @error('icms') <strong>{{ $message }}</strong> @enderror
                         </div>
-                        <div class="col-12 col-md-4 col-sm-6 mb-3">
-                            <label for="valorTotalItem" class="form-label black-text">VALOR TOTAL</label>
-                            <input type="text" id="valorTotalItem" class="form-control" value="R$0.0" disabled>
+                        <div class="mb-3">
+                            <label>VALOR TOTAL</label>
+                            <input type="text" id="valorTotalItem" value="R$0.0"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                                disabled>
                         </div>
-                    </div>
-                    <div class="row d-flex">
-                        <div class="col-12 col-md-4 col-sm-6 mb-3 ms-auto d-flex align-items-end">
-                            <form method="POST" id="inserirItensEntrada" action="">
-                                <button id="inserir" class="btn btn-primary ms-auto">INSERIR</button>
-                            </form>
+                        <div class="mb-3 flex justify-end">
+                            <button id="inserir" {{ $produto ? '' : 'disabled' }}
+                                class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">INSERIR</button>
                         </div>
-                    </div>
-                </form>
-            </section>
-
-        <section class="text-start mb-5">
-            <div class="row">
-                <p class="display-6 ms-auto">ITENS</p>
-            </div>
-
-            <div class="table-responsive-lg">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">PRODUTO</th>
-                            <th scope="col">PREÇO</th>
-                            <th scope="col">QUANTIDADE</th>
-                            <th scope="col">UNIDADE</th>
-                            <th scope="col">IPI</th>
-                            <th scope="col">FRETE</th>
-                            <th scope="col">ICMS</th>
-                            <th scope="col">TOTAL</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>CATALISADOR/TUPER X123X-201X</td>
-                            <td>R$ 350.00</td>
-                            <td>40</td>
-                            <td>UN</td>
-                            <td>1.0</td>
-                            <td>1.0</td>
-                            <td>1.0</td>
-                            <td>R$ 14000.00</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">TOTAL</td>
-                            <td colspan="5">40</td>
-                            <td>R$ 14000.00</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <section class="text-start">
-            <div class="row">
-                <p class="display-6 ms-auto">FINALIZAR ENTRADA</p>
-            </div>
-
-            <form id="finalizarEntrada" method="GET" action="{{ route('entrada.index') }}">
-                <div class="row align-items-end mb-3 d-flex">
-                    <input type="hidden" name="identrada" value="1">
-                    <div class="col-12 col-md-4 col-sm-6 me-auto mb-3">
-                        <label for="valorTotalnota" class="form-label black-text">VALOR TOTAL DA ENTRADA</label>
-                        <input type="text" id="valorTotalnota" class="form-control" value="R$ 14000.00" disabled>
-                    </div>
-                    <div class="col-12 col-md-4 col-sm-6 ms-auto d-flex align-items-end">
-                        <button type="button" id="finalizar" class="btn btn-primary ms-auto">FINALIZAR</button>
                     </div>
                 </div>
+                @if ($produto)
+                    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+                    <script>
+                        var qtd = $("#quantidade"),
+                            preco = $("#precoCompra"),
+                            ipi = $("#ipi"),
+                            frete = $("#frete"),
+                            icms = $("#icms"),
+                            total = $("#valorTotalItem");
+                        qtd.change(function() {
+                            if (qtd.val() < 0) {
+                                alert('Quantidade inválida.');
+                                qtd.val("");
+                            }
+                            calculaValor();
+                        });
+                        ipi.change(function() {
+                            if (ipi.val() < 1) {
+                                alert('IPI inválido.');
+                                ipi.val("1");
+                            } else if (qtd.val() > 0) {
+                                calculaValor();
+                            }
+                        });
+                        frete.change(function() {
+                            if (frete.val() < 1) {
+                                alert('Frete inválido.');
+                                frete.val("1");
+                            } else if (qtd.val() > 0) {
+                                calculaValor();
+                            }
+                        });
+                        icms.change(function() {
+                            if (icms.val() < 1) {
+                                alert('ICMS inválido.');
+                                icms.val("1");
+                            } else if (qtd.val() > 0) {
+                                calculaValor();
+                            }
+                        });
+                        preco.change(function() {
+                            if (preco.val() < 0) {
+                                alert("Valor não pode ser menor que zero!");
+                                preco.val("0");
+                            } else if (preco.val() == "") {
+                                preco.val("{{ $produto->valornafabrica }}");
+                                calculaValor();
+                            } else {
+                                calculaValor();
+                            }
+                        });
+
+                        function calculaValor() {
+                            total.val("");
+
+                            var QTD = qtd.val() != "" ? qtd.val() : 0,
+                                IPI = ipi.val() != "" ? ipi.val() : 1,
+                                FRETE = frete.val() != "" ? frete.val() : 1,
+                                ICMS = icms.val() != "" ? icms.val() : 1;
+
+                            var valor = parseFloat((IPI * FRETE * ICMS) * (QTD * preco.val())).toFixed(2);
+                            total.val("R$" + valor);
+                        }
+                    </script>
+                @endif
             </form>
-        </section>
+        @endif
+
+        <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
+            ITENS
+        </h1>
+        <div class="w-full mb-4">
+            <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+        </div>
+
+        <div class="mb-8 mx-20 overflow-hidden rounded-lg shadow-lg">
+            <table class="w-full">
+                <thead>
+                    <tr
+                        class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+                        <th class="px-4 py-3">#</th>
+                        <th class="px-4 py-3">PRODUTO</th>
+                        <th class="px-4 py-3">PREÇO</th>
+                        <th class="px-4 py-3">QUANTIDADE</th>
+                        <th class="px-4 py-3">UNIDADE</th>
+                        <th class="px-4 py-3">IPI</th>
+                        <th class="px-4 py-3">FRETE</th>
+                        <th class="px-4 py-3">ICMS</th>
+                        <th class="px-4 py-3">TOTAL</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white">
+                    @foreach ($entrada->itensentrada as $key => $item)
+                        <tr class="text-gray-700">
+                            <td class="px-4 py-3 text-ms font-semibold border">{{ $key + 1 }}</td>
+                            <td class="px-4 py-3 text-ms font-semibold border">
+                                {{ $item->produto->categoria->categoria .'/' .$item->produto->marca->marca .' - ' .$item->produto->referencia }}
+                            </td>
+                            <td class="px-4 py-3 text-sm border">{{ $item->precocompra }}</td>
+                            <td class="px-4 py-3 text-sm border">{{ $item->quantidade }}</td>
+                            <td class="px-4 py-3 text-sm border">{{ $item->unidade }}</td>
+                            <td class="px-4 py-3 text-sm border">{{ $item->ipi }}</td>
+                            <td class="px-4 py-3 text-sm border">{{ $item->frete }}</td>
+                            <td class="px-4 py-3 text-sm border">{{ $item->icms }}</td>
+                            <td class="px-4 py-3 text-sm font-semibold border">R$
+                                {{ $item->quantidade * $item->precocompra }}</td>
+                        </tr>
+                    @endforeach
+                    <tr class="text-gray-700">
+                        <td class="px-4 py-3 text-sm font-semibold border"></td>
+                        <td colspan="2" class="px-4 py-3 text-sm font-semibold border">TOTAL</td>
+                        <td class="px-4 py-3 text-sm font-semibold border">
+                            {{ $entrada->countItensEntrada() }}</td>
+                        <td colspan="4" class="px-4 py-3 text-sm font-semibold border"></td>
+                        <td class="px-4 py-3 text-sm font-semibold border">R$ {{ round($entrada->valortotalnota, 2) }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        @if ($entrada->status == 0)
+            <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
+                FINALIZAR ENTRADA
+            </h1>
+            <div class="w-full mb-4">
+                <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+            </div>
+
+            <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
+                <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
+                    <form id="realizarEntrada" method="POST" class="flex flex-col pt-3 md:pt-8"
+                        action="{{ route('entrada.finalizarentrada', $entrada->identrada) }}">
+                        @csrf
+                        <div class="mb-3">
+                            <label>VALOR TOTAL DA ENTRADA</label>
+                            <input type="text" value="R$ {{ round($entrada->valortotalnota, 2) }}"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                                disabled>
+                        </div>
+
+                        <input type="submit" value="FINALIZAR"
+                            class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8" />
+                    </form>
+                </div>
+            </div>
+        @endif
     </section>
-</main>
 @endsection('content')
 
 @push('scripts')
@@ -193,7 +318,9 @@
 
                 var url = new URL(window.location.href);
                 if (url.searchParams.get("idproduto")) {
-                    if (confirm("Possui produto selecionado! Deseja mesmo finalizar a entrada sem inserir o item?")) {
+                    if (confirm(
+                            "Possui produto selecionado! Deseja mesmo finalizar a entrada sem inserir o item?"
+                        )) {
                         $("#finalizarEntrada").submit();
                     } else {
                         return false;

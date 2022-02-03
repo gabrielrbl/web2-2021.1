@@ -8,13 +8,26 @@
             <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
                 <p class="text-center text-3xl">REALIZAR ENTRADA</p>
 
-                <form id="realizarEntrada" method="GET" class="flex flex-col pt-3 md:pt-8" {{-- action="{{ route('entrada.itensentrada') }}" --}}>
+                <form id="realizarEntrada" method="POST" class="flex flex-col pt-3 md:pt-8"
+                    action="{{ route('entrada.store') }}">
+                    @csrf
+
                     <div class="flex flex-col">
                         <label for="name" class="text-lg">FORNECEDOR</label>
-                        <input type="text" id="barraPesquisa"
+                        <input type="text" autocomplete="off" id="barraPesquisa"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
                         <input id="idfornecedor" type="hidden" name="idfornecedor" required>
+                        @error('idfornecedor') <strong>{{ $message }}</strong> @enderror
                     </div>
+
+                    <input type="hidden" name="datacompra" value="{{ date('Y-m-d') }}" />
+                    @error('datacompra') <strong>{{ $message }}</strong> @enderror
+
+                    <input type="hidden" name="valortotalnota" value="0" />
+                    @error('valortotalnota') <strong>{{ $message }}</strong> @enderror
+
+                    <input type="hidden" name="status" value="0" />
+                    @error('status') <strong>{{ $message }}</strong> @enderror
 
                     <input type="submit" value="DAR ENTRADA"
                         class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8" />
@@ -63,7 +76,6 @@
                                         </div>
                                     </div>
                                 </td>
-                                {{-- <td class="px-4 py-3 text-ms font-semibold border">CARTÃO - À VISTA</td> --}}
                                 <td class="px-4 py-3 text-sm border">{{ date('d M Y', strtotime($entrada->datacompra)) }}
                                 </td>
                                 <td class="px-4 py-3 text-xs border">
@@ -80,16 +92,17 @@
                             </td> --}}
                                 <td class="px-4 py-3 text-sm font-semibold border">{{ $entrada->itensentrada->count() }}
                                 </td>
-                                <td class="px-4 py-3 text-sm font-semibold border">R$ {{ $entrada->valortotalnota }}</td>
+                                <td class="px-4 py-3 text-sm font-semibold border">R$
+                                    {{ round($entrada->valortotalnota, 2) }}</td>
                                 <td class="px-4 py-3 text-xs border">
                                     <div class="inline-flex rounded-md shadow-sm" role="group">
                                         <button type="button"
                                             class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
                                             <a class="btn btn-primary"
-                                                href="{{ route('entrada.itensentrada') }}">VISUALIZAR</a>
+                                                href="{{ route('entrada.itensentrada', $entrada->identrada) }}">VISUALIZAR</a>
                                         </button>
                                         <button type="button"
-                                            onclick="deletar('{{ $entrada->identrada }}', '{{ strtoupper(explode(' ', $entrada->fornecedor->nome)[0]) . ' ' . strtoupper(explode(' ', $entrada->fornecedor->nome)[1]) }}')"
+                                            onclick="deletar('{{ $entrada->identrada }}', '{{ strtoupper(explode(' ', $entrada->fornecedor->nome)[0]) .' ' .strtoupper(explode(' ', $entrada->fornecedor->nome)[1]) }}')"
                                             class="py-2 px-4 text-sm font-medium text-gray-900 bg-red-100 rounded-r-md border border-gray-200 hover:bg-red-300 hover:text-black-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
                                             APAGAR
                                         </button>
@@ -117,7 +130,7 @@
                         dataType: "json",
                         data: {
                             _token: CSRF_TOKEN,
-                            search: request.term
+                            nome: request.term
                         },
                         success: function(data) {
                             response(data);
@@ -149,11 +162,12 @@
         });
 
         function deletar(id, nome) {
-            if (confirm("Deseja realmente excluir a entrada de " + nome + "?")) {
-                alert("Entrada excluída com sucesso!");
-                window.location.href = '';
-                return false;
-            }
+            alert("Função ainda não disponível!");
+            // if (confirm("Deseja realmente excluir a entrada de " + nome + "?")) {
+            //     alert("Entrada excluída com sucesso!");
+            //     window.location.href = '';
+            //     return false;
+            // }
         }
     </script>
 @endpush('scripts')

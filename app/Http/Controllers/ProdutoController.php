@@ -3,28 +3,43 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProdutoRequest;
+use App\Models\Carro;
+use App\Models\Categoria;
+use App\Models\Fabricacao;
+use App\Models\Localizacao;
+use App\Models\Marca;
+use App\Models\Motor;
 use App\Models\Produto;
+use App\Models\Valvulas;
 use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
 {
     public function index()
     {
-        $produtos = Produto::all();
+        $produtos = Produto::orderby('idproduto', 'desc')->get();
 
         return view('dashboard.consulta.produto', ['produtos' => $produtos]);
     }
 
     public function create()
     {
-        return view('produtos.create');
+        return view('dashboard.cadastro.produto', [
+            'motores' => Motor::all(),
+            'carros' => Carro::all(),
+            'valvulas' => Valvulas::all(),
+            'fabricacoes' => Fabricacao::all(),
+            'localizacoes' => Localizacao::all(),
+            'categorias' => Categoria::all(),
+            'marcas' => Marca::all(),
+        ]);
     }
 
     public function store(StoreProdutoRequest $request)
     {
         Produto::create($request->all());
 
-        return redirect()->route('produtos.index');
+        return redirect()->route('consulta.produto');
     }
 
     public function show($id)
@@ -39,9 +54,7 @@ class ProdutoController extends Controller
 
     public function update(StoreProdutoRequest $request)
     {
-        Produto::findOrFail($request->id)->update($request->all());
-
-        return redirect()->route('produtos.index');
+        //
     }
 
     public function destroy($id)

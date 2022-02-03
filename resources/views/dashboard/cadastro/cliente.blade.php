@@ -13,7 +13,8 @@
 
         <div class="w-full flex flex-col text-black">
             <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
-                <form class="flex flex-col pt-3 md:pt-8" method="GET" id="form">
+                <form class="flex flex-col pt-3 md:pt-8" method="POST" action="{{ route('cliente.store') }}">
+                    @csrf
                     <div class="flex flex-col pt-4">
                         <label for="selecionar"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">TIPO</label>
@@ -29,6 +30,7 @@
                         <input type="text" id="nome" oninput="validaInput(this, false)" name="nome" placeholder="NOME"
                             autocomplete="off" required
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+                        @error('nome') <strong>{{ $message }}</strong> @enderror
                     </div>
 
                     <div class="flex flex-col pt-4">
@@ -36,6 +38,7 @@
                         <input type="text" id="telefone" oninput="mascara(this, 'tel')" name="telefone"
                             placeholder="TELEFONE" autocomplete="off" required
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+                        @error('telefone') <strong>{{ $message }}</strong> @enderror
                     </div>
 
                     <div class="flex flex-col pt-4 rowCpf">
@@ -43,6 +46,7 @@
                         <input type="text" id="cpf" oninput="mascara(this, 'cpf')" name="cpf" placeholder="CPF"
                             autocomplete="off" required
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+                        @error('cpf') <strong>{{ $message }}</strong> @enderror
                     </div>
 
                     <div class="flex flex-col pt-4 rowCnpj hidden">
@@ -50,7 +54,10 @@
                         <input type="text" id="cnpj" oninput="mascara(this, 'cnpj')" name="cnpj" placeholder="CNPJ"
                             autocomplete="off"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+                        @error('cnpj') <strong>{{ $message }}</strong> @enderror
                     </div>
+
+                    <input type="hidden" name="debito" value="0" />
 
                     <input type="submit" value="CADASTRAR"
                         class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">
@@ -63,14 +70,6 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            $("#form").on("submit", function() {
-                event.preventDefault();
-                $("input[type=submit]").prop("disabled", true);
-                $("input[type=submit]").text("CADASTRANDO...");
-
-                window.location.href = '{{ route('consulta.cliente') }}';
-            });
-
             $("#selecionar").change(function() {
                 if ($(this).val() == "fisico") {
                     $("#cnpj").removeAttr("required");

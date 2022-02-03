@@ -6,12 +6,16 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EntradaController;
 use App\Http\Controllers\FabricacaoController;
 use App\Http\Controllers\FornecedorController;
+use App\Http\Controllers\ItensEntradaController;
+use App\Http\Controllers\ItensVendaController;
 use App\Http\Controllers\LocalizacaoController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\MotorController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ValvulaController;
 use App\Http\Controllers\VendaController;
+use App\Models\Produto;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,34 +29,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('')->group(function () {
-    Route::get('/', function () {
-        return redirect()->route('login');
-    })->name('index');
-
-    Route::get('/login', function () {
-        return view('login');
-    })->name('login');
+Route::get('/', function () {
+    return redirect()->route('dashboard.index');
 });
 
-Route::prefix('dashboard')->group(function () {
+Route::prefix('dashboard')->middleware(['auth'])->group(function () {
     Route::get('/', function () {
-        return view('dashboard.index');
+        return view('dashboard.index', [
+            'produtosmaisvendidos' => DB::select("select * from produtosmaisvendidos(" . date('m') . ")")
+        ]);
     })->name('dashboard.index');
 
     Route::prefix('venda')->group(function () {
         Route::get('/', [VendaController::class, 'index'])->name('venda.index');
         Route::get('{idvenda}/itensVenda/{idproduto?}', [VendaController::class, 'itensVenda'])->name('venda.itensvenda');
         Route::get('{idvenda}/inserirItem', [VendaController::class, 'inserirItem'])->name('venda.inseriritem');
-        Route::post('{idvenda}/inserirItemVenda', [VendaController::class, 'inserirItemVenda'])->name('venda.inseriritemvenda');
+        Route::post('/inserirItemVenda', [ItensVendaController::class, 'store'])->name('itensvenda.store');
         Route::post('/{idvenda}/finalizarVenda', [VendaController::class, 'finalizarVenda'])->name('venda.finalizarvenda');
-        Route::post('/create', [VendaController::class, 'create'])->name('venda.create');
+        Route::post('/store', [VendaController::class, 'store'])->name('venda.store');
         Route::post('/getAutocomplete', [VendaController::class, 'getAutocomplete'])->name('venda.getAutocomplete');
     });
 
     Route::prefix('entrada')->group(function () {
         Route::get('/', [EntradaController::class, 'index'])->name('entrada.index');
-        Route::get('/itensEntrada', [EntradaController::class, 'itensEntrada'])->name('entrada.itensentrada');
+        Route::get('{identrada}/itensEntrada/{idproduto?}', [EntradaController::class, 'itensEntrada'])->name('entrada.itensentrada');
+        Route::get('{identrada}/inserirItem', [EntradaController::class, 'inserirItem'])->name('entrada.inseriritem');
+        Route::post('/inserirItemEntrada', [ItensEntradaController::class, 'store'])->name('itensentrada.store');
+        Route::post('/{identrada}/finalizarEntrada', [EntradaController::class, 'finalizarEntrada'])->name('entrada.finalizarentrada');
+        Route::post('/store', [EntradaController::class, 'store'])->name('entrada.store');
         Route::post('/getAutocomplete', [EntradaController::class, 'getAutocomplete'])->name('entrada.getAutocomplete');
     });
 
@@ -70,54 +74,33 @@ Route::prefix('dashboard')->group(function () {
     });
 
     Route::prefix('cadastro')->group(function () {
-        Route::get('/cliente', function () {
-            return view('dashboard.cadastro.cliente');
-        })->name('cadastro.cliente');
-
-        Route::get('/fornecedor', function () {
-            return view('dashboard.cadastro.fornecedor');
-        })->name('cadastro.fornecedor');
-
-        Route::get('/produto', function () {
-            return view('dashboard.cadastro.produto');
-        })->name('cadastro.produto');
-
-        Route::get('/carro', function () {
-            return view('dashboard.cadastro.carro');
-        })->name('cadastro.carro');
-
-        Route::get('/localizacao', function () {
-            return view('dashboard.cadastro.localizacao');
-        })->name('cadastro.localizacao');
-
-        Route::get('/valvula', function () {
-            return view('dashboard.cadastro.valvula');
-        })->name('cadastro.valvula');
-
-        Route::get('/categoria', function () {
-            return view('dashboard.cadastro.categoria');
-        })->name('cadastro.categoria');
-
-        Route::get('/motor', function () {
-            return view('dashboard.cadastro.motor');
-        })->name('cadastro.motor');
-
-        Route::get('/fabricacao', function () {
-            return view('dashboard.cadastro.fabricacao');
-        })->name('cadastro.fabricacao');
-
-        Route::get('/marca', function () {
-            return view('dashboard.cadastro.marca');
-        })->name('cadastro.marca');
+        Route::get('/cliente', [ClienteController::class, 'create'])->name('cadastro.cliente');
+        Route::post('/cliente', [ClienteController::class, 'store'])->name('cliente.store');
+        Route::get('/fornecedor', [FornecedorController::class, 'create'])->name('cadastro.fornecedor');
+        Route::post('/fornecedor', [FornecedorController::class, 'store'])->name('fornecedor.store');
+        Route::get('/produto', [ProdutoController::class, 'create'])->name('cadastro.produto');
+        Route::post('/produto', [ProdutoController::class, 'store'])->name('produto.store');
+        Route::get('/carro', [CarroController::class, 'create'])->name('cadastro.carro');
+        Route::post('/carro', [CarroController::class, 'store'])->name('carro.store');
+        Route::get('/localizacao', [LocalizacaoController::class, 'create'])->name('cadastro.localizacao');
+        Route::post('/localizacao', [LocalizacaoController::class, 'store'])->name('localizacao.store');
+        Route::get('/valvula', [ValvulaController::class, 'create'])->name('cadastro.valvula');
+        Route::post('/valvula', [ValvulaController::class, 'store'])->name('valvula.store');
+        Route::get('/categoria', [CategoriaController::class, 'create'])->name('cadastro.categoria');
+        Route::post('/categoria', [CategoriaController::class, 'store'])->name('categoria.store');
+        Route::get('/motor', [MotorController::class, 'create'])->name('cadastro.motor');
+        Route::post('/motor', [MotorController::class, 'store'])->name('motor.store');
+        Route::get('/fabricacao', [FabricacaoController::class, 'create'])->name('cadastro.fabricacao');
+        Route::post('/fabricacao', [FabricacaoController::class, 'store'])->name('fabricacao.store');
+        Route::get('/marca', [MarcaController::class, 'create'])->name('cadastro.marca');
+        Route::post('/marca', [MarcaController::class, 'store'])->name('marca.store');
     });
 
     Route::prefix('usuario')->group(function () {
         Route::get('/perfil', function () {
             return view('dashboard.usuario.perfil');
         })->name('usuario.perfil');
-
-        Route::get('/logout', function () {
-            return redirect()->route('login');
-        })->name('usuario.logout');
     });
 });
+
+require __DIR__.'/auth.php';
