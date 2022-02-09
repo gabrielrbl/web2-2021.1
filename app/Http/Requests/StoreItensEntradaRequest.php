@@ -19,7 +19,6 @@ class StoreItensEntradaRequest extends FormRequest
             'idproduto' => 'required',
             'precocompra' => 'required',
             'quantidade' => 'required',
-            'unidade' => 'required',
             'ipi' => 'required',
             'frete' => 'required',
             'icms' => 'required',
@@ -36,8 +35,6 @@ class StoreItensEntradaRequest extends FormRequest
             'precocompra.required' => 'O campo valor de compra é obrigatório.',
 
             'quantidade.required' => 'O campo quantidade é obrigatório.',
-
-            'unidade.required' => 'O campo unidade é obrigatório.',
 
             'ipi.required' => 'O campo IPI é obrigatório.',
 

@@ -16,7 +16,7 @@ class VendaController extends Controller
         return view('dashboard.venda.index', ['vendas' => Venda::orderby('data', 'desc')->get()]);
     }
 
-    public function itensVenda($idvenda, $idproduto=null)
+    public function itensVenda($idvenda, $idproduto = null)
     {
         if ($idproduto) {
             $produto = Produto::find($idproduto);
@@ -48,29 +48,28 @@ class VendaController extends Controller
         $venda->idformapagamento = $request->idformapagamento;
         $venda->save();
 
-        return redirect()->route('venda.itensvenda', [
-            'idvenda' => $idvenda
-        ])->with('success', 'Venda finalizada com sucesso!');
+        return redirect()->route('dashboard.venda.index')->with('success', 'Venda finalizada com sucesso!');
     }
 
-    public function getAutocomplete(Request $request){
+    public function getAutocomplete(Request $request)
+    {
         $nome = $request->nome;
-  
-        if ($nome == ''){
-           $autocomplete = Cliente::orderby('nome', 'asc')->select('idcliente', 'nome')->limit(5)->get();
+
+        if ($nome == '') {
+            $autocomplete = Cliente::orderby('nome', 'asc')->select('idcliente', 'nome')->limit(5)->get();
         } else {
-           $autocomplete = Cliente::orderby('nome', 'asc')->select('idcliente', 'nome')->where('nome', 'ilike', '%' . $nome . '%')->limit(5)->get();
+            $autocomplete = Cliente::orderby('nome', 'asc')->select('idcliente', 'nome')->where('nome', 'ilike', '%' . $nome . '%')->limit(5)->get();
         }
-  
+
         $response = array();
 
-        foreach($autocomplete as $autocomplete){
-           $response[] = array(
-               "value" => $autocomplete->idcliente,
-               "label" => strtoupper($autocomplete->nome)
+        foreach ($autocomplete as $autocomplete) {
+            $response[] = array(
+                "value" => $autocomplete->idcliente,
+                "label" => strtoupper($autocomplete->nome)
             );
         }
-  
+
         echo json_encode($response);
         exit;
     }
@@ -78,7 +77,7 @@ class VendaController extends Controller
     public function store(StoreVendaRequest $request)
     {
         $venda = Venda::create($request->all());
-    
+
         return redirect()->route('venda.itensvenda', ['idvenda' => $venda->idvenda]);
     }
 }

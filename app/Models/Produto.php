@@ -33,6 +33,7 @@ class Produto extends Model
         'idcategoria',
         'idmarca',
         'idlocalizacao',
+        'idunidade',
         'icms',
         'ipi',
         'frete',
@@ -42,7 +43,6 @@ class Produto extends Model
         'valorvenda',
         'desconto',
         'quantidade',
-        'unidade',
         'referencia'
     ];
 
@@ -89,5 +89,10 @@ class Produto extends Model
     function localizacao()
     {
         return $this->belongsTo(Localizacao::class, 'idlocalizacao', 'idlocalizacao');
+    }
+
+    function unidade()
+    {
+        return $this->belongsTo(Unidade::class, 'idunidade', 'idunidade');
     }
 }

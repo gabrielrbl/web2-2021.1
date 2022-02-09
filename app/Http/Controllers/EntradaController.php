@@ -47,9 +47,7 @@ class EntradaController extends Controller
         $entrada->status = 1;
         $entrada->save();
 
-        return redirect()->route('entrada.itensentrada', [
-            'identrada' => $identrada
-        ])->with('success', 'Entrada finalizada com sucesso!');
+        return redirect()->route('dashboard.entrada.index')->with('success', 'Entrada finalizada com sucesso!');
     }
 
     public function getAutocomplete(Request $request)
@@ -78,7 +76,7 @@ class EntradaController extends Controller
     public function store(StoreEntradaRequest $request)
     {
         $entrada = Entrada::create($request->all());
-    
+
         return redirect()->route('entrada.itensentrada', ['identrada' => $entrada->identrada]);
     }
 }

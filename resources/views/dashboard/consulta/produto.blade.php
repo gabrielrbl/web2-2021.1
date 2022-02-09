@@ -16,7 +16,7 @@
                 <a href="{{ route('cadastro.produto') }}">
                     <button type="button"
                         class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                        NOVO CADASTRO</button>
+                        INSERIR PRODUTO</button>
                 </a>
             </div>
         </div>
@@ -41,7 +41,7 @@
                                 <td class="px-4 py-3 text-ms font-semibold border">{{ strtoupper($produto->categoria->categoria . '/' . $produto->marca->marca) }}</td>
                                 <td class="px-4 py-3 text-sm font-semibold border">{{ strtoupper($produto->referencia) }}</td>
                                 <td class="px-4 py-3 text-sm border">{{ $produto->quantidade }}</td>
-                                <td class="px-4 py-3 text-sm border">R$ {{ $produto->valorvenda }}</td>
+                                <td class="px-4 py-3 text-sm border text-right">R$ {{ round($produto->valorvenda, 2) }}</td>
                                 <td class="px-4 py-3 text-sm border">{{ strtoupper($produto->localizacao->departamento) }}</td>
                                 <td class="px-4 py-3 text-xs border">
                                     <div class="inline-flex rounded-md shadow-sm" role="group">

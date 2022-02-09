@@ -4,39 +4,37 @@
 
 @section('content')
     <section class="bg-gray-100 py-8">
-        @if (\Session::has('success'))
-            <script>
-                alert('{!! \Session::get('success') !!}');
-            </script>
-        @endif
-
         <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-            ITENS - VENDA #{{ $venda->idvenda }}
+            VENDA DE PRODUTOS
         </h1>
         <div class="w-full mb-4">
             <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
         </div>
 
         <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
-            <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
-                <p class="text-center text-3xl">INFORMAÇÕES DO CLIENTE</p>
-                <div class="flex flex-col">
-                    <div class="mb-3">
-                        <label>NOME</label>
-                        <input type="text"
+            <div class="px-4 py-5 sm:p-6">
+                <div class="w-full mb-4">
+                    <p class="text-center text-3xl">INFORMAÇÕES DO CLIENTE</p>
+                </div>
+
+                <div class="grid grid-cols-6 gap-6">
+                    <div class="col-span-2 sm:col-span-2">
+                        <label for="nome-cliente" class="block text-sm font-medium text-gray-700">NOME</label>
+                        <input type="text" id="nome-cliente"
                             value="{{ strtoupper(explode(' ', $venda->cliente->nome)[0]) .' ' .strtoupper(explode(' ', $venda->cliente->nome)[1]) }}"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
                             disabled>
                     </div>
-                    <div class="mb-3">
-                        <label>TELEFONE</label>
-                        <input type="text" value="{{ $venda->cliente->telefone }}"
+                    <div class="col-span-2 sm:col-span-2">
+                        <label for="telefone-cliente" class="block text-sm font-medium text-gray-700">TELEFONE</label>
+                        <input type="text" id="telefone-cliente" value="{{ $venda->cliente->telefone }}"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
                             disabled>
                     </div>
-                    <div class="mb-3">
-                        <label>{{ $venda->cliente->cpf ? 'CPF' : 'CNPJ' }}</label>
-                        <input type="text"
+                    <div class="col-span-2 sm:col-span-2">
+                        <label for="dados-cliente"
+                            class="block text-sm font-medium text-gray-700">{{ $venda->cliente->cpf ? 'CPF' : 'CNPJ' }}</label>
+                        <input type="text" id="dados-cliente"
                             value="{{ $venda->cliente->cpf ? $venda->cliente->cpf : $venda->cliente->cnpj }}"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
                             disabled>
@@ -60,58 +58,73 @@
                 @error('idvenda') <strong>{{ $message }}</strong> @enderror
 
                 <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
-                    <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
-                        <div class="mb-3 flex justify-between">
-                            <input type="text" value="{{ $produto ? $produto->referencia : 'SELECIONE O PRODUTO...' }}"
-                                disabled>
-                            <input type="hidden" id="idproduto" name="idproduto"
-                                value="{{ $produto ? $produto->idproduto : '' }}" required>
-                            <a class="btn btn-primary ms-auto" title="Editar"
-                                onclick="window.open(`{{ route('venda.inseriritem', $venda->idvenda) }}`, 'Pesquisar produto', 'width=1000,height=800'); return false;">
-                                <button
-                                    class="px-4 py-2 font-semibold text-sm bg-black text-white rounded-full shadow-sm">PESQUISAR</button>
-                            </a>
+                    <div class="px-4 py-5 bg-white sm:p-6">
+                        <div class="grid grid-cols-6 gap-6">
+                            <div class="col-span-5 sm:col-span-5">
+                                <a class="btn btn-primary ms-auto" title="Editar"
+                                    onclick="window.open(`{{ route('venda.inseriritem', $venda->idvenda) }}`, 'Pesquisar produto', 'width=1000,height=800'); return false;">
+                                    <input type="text"
+                                        class="mt-1 p-5 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                        value="{{ $produto ? $produto->referencia : 'CLIQUE PARA SELECIONAR O PRODUTO...' }}"
+                                        disabled />
+                                </a>
+                            </div>
+
+                            <div class="col-span-1 sm:col-span-1 flex items-center bg-gray">
+                                <input type="hidden" id="idproduto" name="idproduto"
+                                    value="{{ $produto ? $produto->idproduto : '' }}" required>
+                                <a class="btn btn-primary ms-auto" title="Editar"
+                                    onclick="window.open(`{{ route('venda.inseriritem', $venda->idvenda) }}`, 'Pesquisar produto', 'width=1000,height=800'); return false;">
+                                    <button
+                                        class="px-4 py-3 font-semibold text-sm bg-black text-white rounded-full shadow-sm">PESQUISAR</button>
+                                </a>
+                            </div>
+
                             @error('idproduto') <strong>{{ $message }}</strong> @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label>PREÇO</label>
-                            <input type="number" min="0" autocomplete="off" id="valorvenda"
-                                oninput="validaInputNumber(this);"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
-                                name="valorvenda" value="{{ $produto ? $produto->valorvenda : '' }}"
-                                placeholder="PREÇO DE VENDA" {{ $produto ? 'required' : 'disabled' }}>
-                            @error('valorvenda') <strong>{{ $message }}</strong> @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label>QUANTIDADE</label>
-                            <input type="number" min="1" autocomplete="off" id="quantidade"
-                                max="{{ $produto ? $produto->quantidade : '' }}" name="quantidade"
-                                oninput="validaInputNumber(this);"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="QUANTIDADE" {{ $produto ? 'required' : 'disabled' }}>
-                            @error('quantidade') <strong>{{ $message }}</strong> @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label>DESCONTO (%)</label>
-                            <input type="number" min="0" autocomplete="off" max="100" id="desconto" name="desconto"
-                                oninput="validaInputNumber(this);"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="DESCONTO" {{ $produto ? 'required' : 'disabled' }}>
-                            @error('desconto') <strong>{{ $message }}</strong> @enderror
-                        </div>
 
-                        <input type="hidden" name="lucro" value="20" />
+                            <div class="col-span-2 sm:col-span-2">
+                                <label for="valorvenda" class="block text-sm font-medium text-gray-700">PREÇO</label>
+                                <input type="number" min="0" autocomplete="off" id="valorvenda"
+                                    oninput="validaInputNumber(this);"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                                    name="valorvenda" value="{{ $produto ? $produto->valorvenda : '' }}"
+                                    placeholder="PREÇO DE VENDA" {{ $produto ? 'required' : 'disabled' }}>
+                                @error('valorvenda') <strong>{{ $message }}</strong> @enderror
+                            </div>
+                            <div class="col-span-2 sm:col-span-2">
+                                <label for="quantidade" class="block text-sm font-medium text-gray-700">QUANTIDADE</label>
+                                <input type="number" min="1" autocomplete="off" id="quantidade"
+                                    max="{{ $produto ? $produto->quantidade : '' }}" name="quantidade"
+                                    oninput="validaInputNumber(this);"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                                    placeholder="QUANTIDADE" {{ $produto ? 'required' : 'disabled' }}>
+                                @error('quantidade') <strong>{{ $message }}</strong> @enderror
+                            </div>
+                            <div class="col-span-2 sm:col-span-2">
+                                <label for="desconto" class="block text-sm font-medium text-gray-700">DESCONTO (%)</label>
+                                <input type="number" min="0" autocomplete="off" max="100" id="desconto" name="desconto"
+                                    oninput="validaInputNumber(this);"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                                    placeholder="DESCONTO" {{ $produto ? 'required' : 'disabled' }}>
+                                @error('desconto') <strong>{{ $message }}</strong> @enderror
+                            </div>
+                            <div class="col-span-6 sm:col-span-6">
+                                <label for="valorTotalItem" class="block text-sm font-medium text-gray-700">VALOR
+                                    TOTAL</label>
+                                <input type="text" id="valorTotalItem" value="R$0.0"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                                    disabled>
+                            </div>
+                        </div>
+                    </div>
 
-                        <div class="mb-3">
-                            <label>VALOR TOTAL</label>
-                            <input type="text" id="valorTotalItem" value="R$0.0"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
-                                disabled>
-                        </div>
-                        <div class="mb-3 flex justify-end">
-                            <button id="inserir" {{ $produto ? '' : 'disabled' }}
-                                class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">INSERIR</button>
-                        </div>
+                    <input type="hidden" name="lucro" value="20" />
+
+                    <div class="px-4 py-3 text-right sm:px-6 bg-white">
+                        <button id="inserir" {{ $produto ? '' : 'disabled' }}
+                            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                            INSERIR
+                        </button>
                     </div>
                 </div>
                 @if ($produto)
@@ -223,18 +236,12 @@
         </div>
 
         @if ($venda->status == 0)
-            <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-                FINALIZAR VENDA
-            </h1>
-            <div class="w-full mb-4">
-                <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
-            </div>
-
             <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
                 <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
                     <form id="realizarVenda" method="POST" class="flex flex-col pt-3 md:pt-8"
                         action="{{ route('venda.finalizarvenda', $venda->idvenda) }}">
                         @csrf
+
                         <div class="flex flex-col pt-4">
                             <label for="idformapagamento"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">FORMA DE
@@ -247,13 +254,6 @@
                                         {{ $formapagamento->forma . ' - ' . $formapagamento->condicao }}</option>
                                 @endforeach
                             </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label>VALOR TOTAL DA VENDA</label>
-                            <input type="text" value="R$ {{ round($venda->valortotal, 2) }}"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
-                                disabled>
                         </div>
 
                         <input type="submit" value="FINALIZAR"

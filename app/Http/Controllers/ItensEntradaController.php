@@ -24,7 +24,7 @@ class ItensEntradaController extends Controller
 
         return redirect()->route('entrada.itensentrada', [
             'identrada' => $itemEntrada->identrada
-            ])->with('success', 'Item de entrada cadastrado com sucesso!');
+        ]);
     }
 
     public function show($id)

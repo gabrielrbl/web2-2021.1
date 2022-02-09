@@ -3,6 +3,12 @@
 @section('title', 'Venda')
 
 @section('content')
+    @if (\Session::has('success'))
+        <script>
+            alert('{!! \Session::get('success') !!}');
+        </script>
+    @endif
+
     <section class="bg-gray-100 py-8">
         <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
             <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
@@ -14,7 +20,7 @@
 
                     <div class="flex flex-col">
                         <label for="name" class="text-lg">CLIENTE</label>
-                        <input type="text" autocomplete="off" id="barraPesquisa"
+                        <input type="text" autocomplete="off" id="barraPesquisa" autofocus
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
                         <input id="idcliente" type="hidden" name="idcliente" required>
                         @error('idcliente') <strong>{{ $message }}</strong> @enderror

@@ -3,6 +3,12 @@
 @section('title', 'Entrada')
 
 @section('content')
+    @if (\Session::has('success'))
+        <script>
+            alert('{!! \Session::get('success') !!}');
+        </script>
+    @endif
+
     <section class="bg-gray-100 py-8">
         <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
             <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
@@ -14,7 +20,7 @@
 
                     <div class="flex flex-col">
                         <label for="name" class="text-lg">FORNECEDOR</label>
-                        <input type="text" autocomplete="off" id="barraPesquisa"
+                        <input type="text" autocomplete="off" id="barraPesquisa" autofocus
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
                         <input id="idfornecedor" type="hidden" name="idfornecedor" required>
                         @error('idfornecedor') <strong>{{ $message }}</strong> @enderror
@@ -82,14 +88,6 @@
                                     <span
                                         class="px-2 py-1 font-semibold leading-tight text-{{ $entrada->status == 1 ? 'green-700 bg-green-100' : 'red-700 bg-red-100' }} rounded-sm">{{ $entrada->status == 1 ? 'FINALIZADA' : 'ABERTA' }}</span>
                                 </td>
-                                {{-- <td class="px-4 py-3 text-xs border">
-                                <span class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-gray-100 rounded-sm">
-                                    PENDENTE </span>
-                            </td>
-                            {{-- <td class="px-4 py-3 text-xs border">
-                                <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
-                                    RECUSADO </span>
-                            </td> --}}
                                 <td class="px-4 py-3 text-sm font-semibold border">{{ $entrada->itensentrada->count() }}
                                 </td>
                                 <td class="px-4 py-3 text-sm font-semibold border">R$

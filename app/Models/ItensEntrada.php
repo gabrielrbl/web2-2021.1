@@ -22,8 +22,8 @@ class ItensEntrada extends Model
         'identrada',
         'idproduto',
         'precocompra',
+        'precoimpostos',
         'quantidade',
-        'unidade',
         'ipi',
         'frete',
         'icms'

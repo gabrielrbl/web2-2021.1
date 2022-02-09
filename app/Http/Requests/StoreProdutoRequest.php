@@ -22,8 +22,8 @@ class StoreProdutoRequest extends FormRequest
             'idcategoria' => 'required',
             'idmarca' => 'required',
             'idlocalizacao' => 'required',
+            'idunidade' => 'required',
             'referencia' => 'required|max:20',
-            'unidade' => 'required|max:20',
         ];
     }
 
@@ -44,11 +44,10 @@ class StoreProdutoRequest extends FormRequest
 
             'idlocalizacao.required' => 'A localização do produto é obrigatória.',
 
+            'idunidade.required' => 'A unidade do produto é obrigatória.',
+
             'referencia.required' => 'A referência do produto é obrigatória.',
             'referencia.max' => 'A referência do produto deve conter no máximo :max caracteres.',
-
-            'unidade.required' => 'A unidade do produto é obrigatória.',
-            'unidade.max' => 'A unidade do produto deve conter no máximo :max caracteres.'
         ];
     }
 }

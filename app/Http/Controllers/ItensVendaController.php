@@ -24,7 +24,7 @@ class ItensVendaController extends Controller
 
         return redirect()->route('venda.itensvenda', [
             'idvenda' => $itemVenda->idvenda
-        ])->with('success', 'Item de venda cadastrado com sucesso!');
+        ]);
     }
 
     public function show($id)

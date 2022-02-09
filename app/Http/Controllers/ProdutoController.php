@@ -10,6 +10,7 @@ use App\Models\Localizacao;
 use App\Models\Marca;
 use App\Models\Motor;
 use App\Models\Produto;
+use App\Models\Unidade;
 use App\Models\Valvulas;
 use Illuminate\Http\Request;
 
@@ -30,6 +31,7 @@ class ProdutoController extends Controller
             'valvulas' => Valvulas::all(),
             'fabricacoes' => Fabricacao::all(),
             'localizacoes' => Localizacao::all(),
+            'unidades' => Unidade::all(),
             'categorias' => Categoria::all(),
             'marcas' => Marca::all(),
         ]);

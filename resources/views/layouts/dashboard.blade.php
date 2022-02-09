@@ -33,15 +33,15 @@
                     </li>
                     <li class="mr-3">
                         <a class="inline-block text-black no-underline py-2 px-4"
-                            href="{{ route('venda.index') }}">VENDER</a>
+                            href="{{ route('venda.index') }}">VENDA</a>
                     </li>
                     <li class="mr-3">
                         <a class="inline-block text-black no-underline py-2 px-4"
-                            href="{{ route('entrada.index') }}">DAR ENTRADA</a>
+                            href="{{ route('entrada.index') }}">ENTRADA</a>
                     </li>
                     <li class="mr-3">
                         <div class="dropdown inline-block relative">
-                            <button class="inline-block text-black no-underline py-2 px-4">CONSULTAR</button>
+                            <button class="inline-block text-black no-underline py-2 px-4">CONSULTA</button>
                             <ul class="dropdown-menu absolute hidden text-black pt-1 bg-gray-300">
                                 <li>
                                     <a class="rounded-t py-2 px-4 block whitespace-no-wrap"
@@ -82,6 +82,25 @@
                                 <li>
                                     <a class="rounded-t py-2 px-4 block whitespace-no-wrap"
                                         href="{{ route('consulta.marca') }}">MARCA</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="mr-3">
+                        <div class="dropdown inline-block relative">
+                            <button class="inline-block text-black no-underline py-2 px-4">RELATÓRIOS</button>
+                            <ul class="dropdown-menu absolute hidden text-black pt-1 bg-gray-300">
+                                <li>
+                                    <a class="rounded-t py-2 px-4 block whitespace-no-wrap"
+                                        href="#">VENDAS POR DIA</a>
+                                </li>
+                                <li>
+                                    <a class="rounded-t py-2 px-4 block whitespace-no-wrap"
+                                        href="#">VENDAS POR MÊS</a>
+                                </li>
+                                <li>
+                                    <a class="rounded-t py-2 px-4 block whitespace-no-wrap"
+                                        href="#">CLIENTES QUE DEVEM</a>
                                 </li>
                             </ul>
                         </div>
@@ -131,7 +150,7 @@
     </footer> --}}
 
     <footer class="bg-white fixed bottom-0 w-full flex justify-center items-center">
-        <span class="uppercase text-gray-500">Desenvolvido por Gabriel Lobo</span>
+        <span class="uppercase text-gray-500">Desenvolvido por Gabriel Lobo - WEB 2 - SEMESTRE 2021.1</span>
     </footer>
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
